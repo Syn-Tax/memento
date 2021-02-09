@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import './Css/App.css';
+import { Paper, Grid, Box, Button, makeStyles, IconButton } from '@material-ui/core';
+import NavbarToggle from './Components/NavbarToggle'
+import MenuIcon from '@material-ui/icons/Menu';
+import Welcome from './Components/Welcome';
+// const electron = window.require('electron');
+// const remote = electron.remote
+// const {dialog} = remote
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: "16%"
+  },
+  paper: {
+    paddingTop: 16,
+  }
+}))
 
 function App() {
+  const classes = useStyles()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Welcome />
+      <NavbarToggle />
     </div>
   );
 }
