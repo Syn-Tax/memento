@@ -1,28 +1,30 @@
 import './Css/App.css';
-import { Paper, Grid, Box, Button, makeStyles, IconButton } from '@material-ui/core';
 import NavbarToggle from './Components/NavbarToggle'
-import MenuIcon from '@material-ui/icons/Menu';
 import Welcome from './Components/Welcome';
-// const electron = window.require('electron');
-// const remote = electron.remote
-// const {dialog} = remote
+import CreateListFab from './Components/CreateListFab';
+import SortMenu from './Components/SortMenu';
+import ViewMenu from './Components/ViewMenu';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: "16%"
-  },
-  paper: {
-    paddingTop: 16,
-  }
-}))
+import { Grid } from '@material-ui/core';
 
 function App() {
-  const classes = useStyles()
-
   return (
     <div className="App">
-      <Welcome />
-      <NavbarToggle />
+      <div style={{ position: "static" }}>
+        <Welcome />
+        <NavbarToggle />
+      </div>
+
+      <Grid container style={{ top: "27%", position: "absolute" }}>
+        <Grid item xs={3}>
+          <CreateListFab />
+        </Grid>
+        <Grid item xs={5}></Grid>
+        <Grid item xs={4} style={{display: 'flex', flexDirection: 'row'}} >
+          <SortMenu />
+          <ViewMenu />
+        </Grid>
+      </Grid>
     </div>
   );
 }

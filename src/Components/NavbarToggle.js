@@ -5,7 +5,7 @@ import { Paper, Grid, Box, Button, makeStyles, IconButton } from '@material-ui/c
 function NavbarToggle() {
     return (
         <div style={{paddingTop: "5%", zIndex: 1}}>
-            <Box boxShadow={3} width={50} style={{ borderBottomRightRadius: "50%", borderTopRightRadius: "50%", position: 'absolute', backgroundColor: "white"}}>
+            <Box boxShadow={3} width={50} style={{ borderBottomRightRadius: "50%", borderTopRightRadius: "50%", position: 'fixed', backgroundColor: "white"}}>
                 <IconButton onClick={() => { console.log("clicked") }}>
                     <MenuIcon />
                 </IconButton>
