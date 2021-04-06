@@ -20,7 +20,7 @@ function ListGrid(props) {
     console.log(items)
 
     const openList = (list) => {
-        console.log(list["name"])
+        console.log(list)
     }
 
     return (
@@ -29,7 +29,7 @@ function ListGrid(props) {
                 <Grid container spacing={3} style={{ top: `${35 + (i * (height + verticalSpacing))}%`, position: "absolute", height: `${height}%` }}>
                     <Grid item xs={2}></Grid>
                     {item.map((list, j) => (
-                        <Grid item xs={3}><ListItem type={list["type"]} name={list["name"]} onClick={() => openList(list)} /></Grid>
+                        <Grid item xs={3}><ListItem type={list["TYPE"]} name={list["NAME"]} onClick={() => openList(list)} /></Grid>
                     ))}
                 </Grid>
             ))}

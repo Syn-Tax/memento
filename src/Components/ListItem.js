@@ -7,14 +7,16 @@ function ListItem(props) {
                     "List": "#F6D57E"}
 
     return (
-        <Box onClick={props.onClick} boxShadow={3} style={{ width: '17%', height: '100%', backgroundColor: colors[props.type], borderRadius: 4, position: "absolute" }}>
-            <Box style={{ width: '70%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%" }} >
-                <span style={{ fontFamily: "Roboto", fontSize: 17, top: '20%', position: "absolute" }} >
-                    {props.name}
-                </span>
+        <div>
+            <Box onClick={props.onClick} boxShadow={3} style={{ width: '17%', height: '100%', backgroundColor: colors[props.type], borderRadius: 4, position: "absolute" }}>
+                <Box style={{ width: '70%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%" }} >
+                    <span style={{ fontFamily: "Roboto", fontSize: 17, top: '20%', position: "absolute" }} >
+                        {props.name}
+                    </span>
+                </Box>
+                <Box style={{ width: '15%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%", left: "70%", borderBottomRightRadius: "50%", borderTopRightRadius: "50%" }} ></Box>
             </Box>
-            <Box style={{ width: '15%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%", left: "70%", borderBottomRightRadius: "50%", borderTopRightRadius: "50%" }} ></Box>
-        </Box>
+        </div>
     );
 }
 
