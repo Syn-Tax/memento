@@ -11,7 +11,7 @@ const sortOptions = [
     'LAST USE'
 ]
 
-function SortMenu() {
+function SortMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null)
     const [selectedIndex, setSelectedIndex] = React.useState(0)
 
@@ -22,7 +22,8 @@ function SortMenu() {
     const handleMenuItemClick = (event, index) => {
         setSelectedIndex(index)
         setAnchorEl(null)
-        console.log(sortOptions[index])
+        // console.log(sortOptions[index])
+        props.changeState(sortOptions[index])
         // TODO: Add ability to re-render folders/lists based on sorting
     }
 

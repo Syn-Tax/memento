@@ -6,11 +6,16 @@ function ListGrid(props) {
     const verticalSpacing = 5
     const height = 16
 
+    props.items.sort((a, b) => ((a[props.sortMethod] < b[props.sortMethod]) ? -1 : (a[props.sortMethod] > b[props.sortMethod]) ? 1 : 0))
+
     let items = []
 
     for (let i=0; i<props.items.length; i += 3) {
         items.push(props.items.slice(i, i+3))
     }
+
+    console.log(props.sortMethod)
+
     items.push([])
     console.log(items)
 
