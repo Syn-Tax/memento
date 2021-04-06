@@ -1,14 +1,34 @@
-import { Grid } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import ListItem from './ListItem';
 
-function ListGrid() {
+
+function ListGrid(props) {
+    const verticalSpacing = 5
+    const height = 16
+
+    let items = []
+
+    for (let i=0; i<props.items.length; i += 3) {
+        items.push(props.items.slice(i, i+3))
+    }
+    items.push([])
+    console.log(items)
+
+    const openList = (list) => {
+        console.log(list["name"])
+    }
+
     return (
-        <Grid container spacing={3} style={{ top: "35%", position: "absolute" }}>
-            <Grid item xs={2}></Grid>
-            <Grid item xs={3}><ListItem type="Folder" name="Folder" onClick={() => console.log("test")} /></Grid>
-            <Grid item xs={3}><ListItem type="List" name="List 1" /></Grid>
-            <Grid item xs={3}><ListItem type="List" name="List 2" /></Grid>
-        </Grid>
+        <div>
+            {items.map((item, i) => (
+                <Grid container spacing={3} style={{ top: `${35 + (i * (height + verticalSpacing))}%`, position: "absolute", height: `${height}%` }}>
+                    <Grid item xs={2}></Grid>
+                    {item.map((list, j) => (
+                        <Grid item xs={3}><ListItem type={list["type"]} name={list["name"]} onClick={() => openList(list)} /></Grid>
+                    ))}
+                </Grid>
+            ))}
+        </div>
     );
 }
 

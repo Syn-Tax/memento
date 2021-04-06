@@ -5,8 +5,8 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const sortOptions = [
-    'A-Z',
-    'Z-A',
+    'TYPE',
+    'NAME',
     'CREATED',
     'LAST USE'
 ]
@@ -22,6 +22,7 @@ function SortMenu() {
     const handleMenuItemClick = (event, index) => {
         setSelectedIndex(index)
         setAnchorEl(null)
+        console.log(sortOptions[index])
         // TODO: Add ability to re-render folders/lists based on sorting
     }
 

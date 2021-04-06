@@ -8,6 +8,22 @@ import ListGrid from './Components/ListGrid';
 
 import { Grid } from '@material-ui/core';
 
+const gridItems = [{"type": "Folder", "name": "Folder 1", "path": null},
+                   {"type": "Folder", "name": "Folder 2", "path": null},
+                   {"type": "List", "name": "List 1"},
+                   {"type": "List", "name": "List 2"},
+                   {"type": "List", "name": "List 3"},
+                   {"type": "Folder", "name": "Folder 1", "path": null},
+                   {"type": "Folder", "name": "Folder 2", "path": null},
+                   {"type": "List", "name": "List 1"},
+                   {"type": "List", "name": "List 2"},
+                   {"type": "List", "name": "List 3"},
+                   {"type": "Folder", "name": "Folder 1", "path": null},
+                   {"type": "Folder", "name": "Folder 2", "path": null},
+                   {"type": "List", "name": "List 1"},
+                   {"type": "List", "name": "List 2"},
+                   {"type": "List", "name": "List 3"}]
+
 function App() {
   return (
     <div className="App">
@@ -26,7 +42,8 @@ function App() {
         </Grid>
       </Grid>
 
-      <ListGrid />
+      <ListGrid items={gridItems}/>
+
     </div>
   );
 }
