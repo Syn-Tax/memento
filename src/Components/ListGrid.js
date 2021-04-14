@@ -14,10 +14,10 @@ function ListGrid(props) {
         items.push(props.items.slice(i, i+3))
     }
 
-    console.log(props.sortMethod)
+    // console.log(props.sortMethod)
 
     items.push([])
-    console.log(items)
+    // console.log(items)
 
     const openList = (list) => {
         console.log(list)
@@ -26,10 +26,10 @@ function ListGrid(props) {
     return (
         <div>
             {items.map((item, i) => (
-                <Grid container spacing={3} style={{ top: `${35 + (i * (height + verticalSpacing))}%`, position: "absolute", height: `${height}%` }}>
+                <Grid container spacing={3} style={{ top: `${props.top + (i * (height + verticalSpacing))}%`, position: "absolute", height: `${height}%` }}>
                     <Grid item xs={2}></Grid>
                     {item.map((list, j) => (
-                        <Grid item xs={3}><ListItem type={list["TYPE"]} name={list["NAME"]} onClick={() => openList(list)} /></Grid>
+                        <Grid item xs={3}><ListItem type={list["TYPE"]} name={list["NAME"]} path={list["PATH"]} /></Grid>
                     ))}
                 </Grid>
             ))}

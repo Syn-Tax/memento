@@ -1,54 +1,38 @@
 import React from 'react';
+import Home from './Views/Home';
+import Folder from './Views/Folder';
 import './Css/App.css';
-import NavbarToggle from './Components/NavbarToggle'
-import Welcome from './Components/Welcome';
-import CreateListFab from './Components/CreateListFab';
-import SortMenu from './Components/SortMenu';
-import ViewMenu from './Components/ViewMenu';
-import ListGrid from './Components/ListGrid';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { getFiles } from './Utils/GetFiles';
+const electron = window.require('electron')
+const fs = electron.remote.require('fs')
 
-import { Grid } from '@material-ui/core';
-
-const gridItems = [{"TYPE": "Folder", "NAME": "Folder 1", "path": null},
-                   {"TYPE": "Folder", "NAME": "Folder 2", "path": null},
-                   {"TYPE": "List", "NAME": "List 1"},
-                   {"TYPE": "List", "NAME": "List 2"},
-                   {"TYPE": "List", "NAME": "List 3"},
-                   {"TYPE": "List", "NAME": "List 4"},
-                   {"TYPE": "List", "NAME": "List 5"},
-                   {"TYPE": "List", "NAME": "List 6"},
-                   {"TYPE": "Folder", "NAME": "zolder 5", "path": null},
-                   {"TYPE": "Folder", "NAME": "zolder 6", "path": null},
-                   {"TYPE": "Folder", "NAME": "Folder 3", "path": null},
-                   {"TYPE": "Folder", "NAME": "Folder 4", "path": null},
-                   {"TYPE": "List", "NAME": "List 7"},
-                   {"TYPE": "List", "NAME": "List 8"},
-                   {"TYPE": "List", "NAME": "List 9"}]
+// this must be from the point of view of the root folder
+const dataFolder = "./Data/"
+let files = getFiles(dataFolder)
 
 function App() {
-  const [sortMethod, setSortMethod] = React.useState("TYPE")
+    const [gridItems, setGridItems] = React.useState(files)
 
-  return (
-    <div className="App">
-      <div style={{ position: "static" }}>
-        <Welcome />
-        <NavbarToggle />
-      </div>
+    fs.watch(dataFolder, {recursive: true}, (event, file) => {
+        files = getFiles(dataFolder)
+        setGridItems(files)
+    })
 
-      <Grid container style={{ top: "27%", position: "absolute" }}>
-        <Grid item xs={3}>
-          <CreateListFab />
-        </Grid>
-        <Grid item xs={6}></Grid>
-        <Grid item xs={3} style={{display: 'flex', flexDirection: 'row'}} >
-          <SortMenu changeState={(method) => setSortMethod(method)} />
-        </Grid>
-      </Grid>
-
-      <ListGrid items={gridItems} sortMethod={sortMethod} />
-
-    </div>
-  );
+    return (
+        <div className="App">
+            <Router>
+                <Switch>
+                    <Route exact path="/">
+                        <Home gridItems={gridItems} />
+                    </Route>
+                    <Route path="/folder/:pathStr">
+                        <Folder gridItems={gridItems} />
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
+    )
 }
 
 export default App;

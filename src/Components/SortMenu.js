@@ -22,9 +22,7 @@ function SortMenu(props) {
     const handleMenuItemClick = (event, index) => {
         setSelectedIndex(index)
         setAnchorEl(null)
-        // console.log(sortOptions[index])
         props.changeState(sortOptions[index])
-        // TODO: Add ability to re-render folders/lists based on sorting
     }
 
     const CloseMenu = () => {

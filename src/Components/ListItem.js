@@ -1,5 +1,6 @@
 import { Box } from '@material-ui/core';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 function ListItem(props) {
@@ -8,14 +9,16 @@ function ListItem(props) {
 
     return (
         <div>
-            <Box onClick={props.onClick} boxShadow={3} style={{ width: '17%', height: '100%', backgroundColor: colors[props.type], borderRadius: 4, position: "absolute" }}>
-                <Box style={{ width: '70%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%" }} >
-                    <span style={{ fontFamily: "Roboto", fontSize: 17, top: '20%', position: "absolute" }} >
-                        {props.name}
-                    </span>
+            <Link to={`/${props.type.toLowerCase()}/${props.path}`}>
+                <Box boxShadow={3} style={{ width: '17%', height: '100%', backgroundColor: colors[props.type], borderRadius: 4, position: "absolute" }}>
+                    <Box style={{ width: '70%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%" }} >
+                        <span style={{ fontFamily: "Roboto", fontSize: 17, top: '20%', position: "absolute" }} >
+                            {props.name}
+                        </span>
+                    </Box>
+                    <Box style={{ width: '15%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%", left: "70%", borderBottomRightRadius: "50%", borderTopRightRadius: "50%" }} ></Box>
                 </Box>
-                <Box style={{ width: '15%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%", left: "70%", borderBottomRightRadius: "50%", borderTopRightRadius: "50%" }} ></Box>
-            </Box>
+            </Link>
         </div>
     );
 }
