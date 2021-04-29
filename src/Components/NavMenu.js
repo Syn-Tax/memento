@@ -25,7 +25,6 @@ function NavMenu(props) {
     const [selectedItem, setSelectedItem] = React.useState(0);
     const classes = styles()
 
-
     props.lists.sort((a, b) => ((a[sortMethod] < b[sortMethod]) ? -1 : (a[sortMethod] > b[sortMethod]) ? 1 : 0))
 
     let lists = []

@@ -11,7 +11,7 @@ function randomHex(upperBound) {
 
 function getPath(name){
     name = name.replace(/\s+/g, '');
-    return name + "_" + randomHex(16**3)
+    return name
 }
 
 export function getFiles(dir) {

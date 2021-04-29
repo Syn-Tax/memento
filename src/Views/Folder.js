@@ -79,7 +79,6 @@ function Folder(props) {
 
     return (
         <div>
-            <h6>path: {pathStr}</h6>
             <div style={{ position: "static" }}>
                 <NavbarToggle lists={props.gridItems} />
             </div>
@@ -90,7 +89,7 @@ function Folder(props) {
 
             <Grid container style={{ top: "10%", position: "absolute" }}>
                 <Grid item xs={3}>
-                    <CreateListFab />
+                    <CreateListFab path={pathStr} />
                 </Grid>
                 <Grid item xs={6}></Grid>
                 <Grid item xs={3} style={{ display: 'flex', flexDirection: 'row' }} >

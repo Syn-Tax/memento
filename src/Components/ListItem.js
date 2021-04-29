@@ -16,7 +16,7 @@ function ListItem(props) {
                             {props.name}
                         </span>
                     </Box>
-                    <Box style={{ width: '15%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%", left: "70%", borderBottomRightRadius: "50%", borderTopRightRadius: "50%" }} ></Box>
+                    <Box style={{ width: '3.15vh', height: '3.15vh', backgroundColor: "white", position: "absolute", top: "10%", left: "70%", borderBottomRightRadius: "50%", borderTopRightRadius: "50%" }} ></Box>
                 </Box>
             </Link>
         </div>

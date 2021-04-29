@@ -1,6 +1,8 @@
 import React from 'react';
 import Home from './Views/Home';
 import Folder from './Views/Folder';
+import CreateFolder from './Views/CreateFolder';
+import CreateList from './Views/CreateList';
 import './Css/App.css';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { getFiles } from './Utils/GetFiles';
@@ -19,6 +21,8 @@ function App() {
         setGridItems(files)
     })
 
+    console.log(window.location.href)
+
     return (
         <div className="App">
             <Router>
@@ -28,6 +32,12 @@ function App() {
                     </Route>
                     <Route path="/folder/:pathStr">
                         <Folder gridItems={gridItems} />
+                    </Route>
+                    <Route path="/create-folder/:pathStr">
+                        <CreateFolder gridItems={gridItems} />
+                    </Route>
+                    <Route path="/create-list/:pathStr">
+                        <CreateList gridItems={gridItems} />
                     </Route>
                 </Switch>
             </Router>
