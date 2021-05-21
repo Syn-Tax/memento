@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, MenuItem, Button } from '@material-ui/core';
+import { Menu, MenuItem, Button, Fab } from '@material-ui/core';
 import SortByAlphaIcon from '@material-ui/icons/SortByAlpha';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -31,11 +31,11 @@ function SortMenu(props) {
 
     return (
         <div style={{backgroundColor: "white", paddingRight: "3%"}}>
-            <Button variant="contained" style={{backgroundColor: "white", width: 150, height: 40, fontSize: 14}} onClick={OpenMenu}>
+            <Fab variant="extended" style={{backgroundColor: "white", width: 150, fontSize: 14}} onClick={OpenMenu}>
                 <SortByAlphaIcon style={{position: "absolute", left: 10, opacity: 0.7}} />
                 <p style={{textAlign: "center"}}>{sortOptions[selectedIndex]}</p>
                 <ArrowLeftIcon style={{position: 'absolute', right: 10, opacity: 0.7}} />
-            </Button>
+            </Fab>
             <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={CloseMenu}>
                 {sortOptions.map((option, index) => (
                     <MenuItem key={option} style={{width: 150, fontSize: 14}} onClick={(event) => handleMenuItemClick(event, index)}>

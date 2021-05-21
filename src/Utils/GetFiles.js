@@ -4,11 +4,6 @@ const fs = electron.remote.require('fs')
 
 const dataFolder = "../../Data/"
 
-function randomHex(upperBound) {
-    let number = Math.floor(Math.random()*upperBound)
-    return number.toString(16)
-}
-
 function getPath(name){
     name = name.replace(/\s+/g, '');
     return name

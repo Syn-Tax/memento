@@ -21,7 +21,6 @@ function App() {
         setGridItems(files)
     })
 
-    console.log(window.location.href)
 
     return (
         <div className="App">
