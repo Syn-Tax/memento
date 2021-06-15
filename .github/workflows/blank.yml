@@ -11,6 +11,8 @@ jobs:
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
+      - run: npm install electron-builder --save-dev
+
       - name: Check out Git repository
         uses: actions/checkout@v1
 
