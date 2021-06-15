@@ -42,8 +42,6 @@ function CreateListFab(props) {
         setAnchorEl(null);
     }
 
-    console.log(props.path)
-
     return (
         <div>
             <Fab variant="extended" style={{ backgroundColor: "white" }} onClick={OpenMenu}>

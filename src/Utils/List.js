@@ -28,6 +28,8 @@ function loadStr(string) {
             questions.push({"TITLE": params[1], "TYPE": "text", "ANSWERS": params[2].split(";")})
         }
     }
+
+    return questions
 }
 
 export function saveList(questions, name, pathStr) {
@@ -52,20 +54,15 @@ export function saveList(questions, name, pathStr) {
     })
 }
 
-export function loadList(name, pathStr) {
+export function loadList(pathStr) {
     const pathS = pathStr.split('-')
     let file = dataFolder
 
-    if (pathS[0] === "Home") {
-        file = path.join(file, name+".list")
-    } else {
-        for (let i = 0; i < pathS.length; i++) {
-            file = path.join(file, pathS[i])
-        }
-        file = path.join(file, name + ".list")
+    for (let i = 0; i < pathS.length; i++) {
+        file = path.join(file, pathS[i])
     }
 
-    const questions = loadStr(fs.readFile(file, (err) => {
+    const questions = loadStr(fs.readFileSync(file, 'utf-8', (err) => {
         if (err) throw err
         console.log(`read ${file}`)
     }))

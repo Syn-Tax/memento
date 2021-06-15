@@ -12,7 +12,7 @@ function CreateQuestion(props) {
     const [type, setType] = React.useState("text")
 
     const answerChange = (event, index) => {
-        let symbolRegex = /^[a-zA-Z0-9-*\/&^#@()\[\]=+_\\ ]*$/;
+        let symbolRegex = /^[a-zA-Z0-9-*\/&^#@()\[\]=+_\\., ]*$/;
         if (!symbolRegex.exec(event.target.value)) {
             setInvalidAnswer(true)
         } else {
