@@ -1,6 +1,7 @@
 {
   "name": "latin-testing",
   "version": "0.1.0",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -10,8 +11,6 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.6.3",
     "concurrently": "^5.3.0",
-    "electron": "^11.2.3",
-    "electron-devtools-installer": "^3.2.0",
     "query-string": "^7.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -23,11 +22,11 @@
   },
   "main": "main.js",
   "scripts": {
-    "react-start": "react-scripts start",
-    "react-build": "react-scripts build",
-    "react-test": "react-scripts test",
-    "react-eject": "react-scripts eject",
-    "start": "concurrently \"set BROWSER=none & npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "electron-pack": "electron-builder build -c.extraMetadata.main=build/main.js --publish never"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +50,14 @@
     "@babel/core": "^7.14.6",
     "@babel/preset-react": "^7.14.5",
     "@electron-forge/cli": "^6.0.0-beta.57",
-    "babel-loader": "8.1.0"
-  }
+    "babel-loader": "8.1.0",
+    "electron": "^11.2.3",
+    "electron-builder": "^22.11.7"
+  },
+  "build": {
+    "files": [
+      "build/**/*",
+     "node_modules/**/*"
+    ]
+}
 }

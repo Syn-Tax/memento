@@ -11,7 +11,6 @@ jobs:
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
-
       - name: Check out Git repository
         uses: actions/checkout@v1
 
@@ -20,10 +19,13 @@ jobs:
         with:
           node-version: 10
 
-      - run: npm install electron-builder --save-dev
+      - name: Build app
+        run: npm run build
 
       - name: Build/release Electron app
-        uses: samuelmeuli/action-electron-builder@v1
+        uses: samuelmeuli/action-electron-builder@
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'v1
         with:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
