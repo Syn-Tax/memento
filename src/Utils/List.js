@@ -2,7 +2,7 @@ const electron = window.require("electron")
 const fs = electron.remote.require("fs")
 const path = electron.remote.require("path")
 
-const dataFolder = "./Data/"
+const dataFolder = path.join(electron.remote.app.getPath('userData'), "./Data/")
 
 function dumpStr(questions) {
     let output = ""

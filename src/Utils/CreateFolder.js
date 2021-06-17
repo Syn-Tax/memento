@@ -1,19 +1,22 @@
 const electron = window.require('electron')
 const fs = electron.remote.require('fs')
+const path = electron.remote.require('path')
+
+const dataFolder = path.join(electron.remote.app.getPath('userData'), "./Data")
 
 export function createFolder(name, pathRaw) {
-    let path
+    let pathFinal
     if (pathRaw[0] == "Home") {
-        path = `./Data/${name}`
+        pathFinal = path.join(dataFolder, name)
     } else {
-        let path = `./Data/${pathRaw.join("/")}/${name}`
+        pathFinal = path.join(dataFolder, pathRaw.join("/"), name)
     }
-    console.log(path)
-    fs.mkdirSync(path)
+    console.log(pathFinal)
+    fs.mkdirSync(pathFinal)
 }
 
-function checkName(name, path, lists) {
-    if (path[0] === "Home") {
+function checkName(name, pathRaw, lists) {
+    if (pathRaw[0] === "Home") {
         for (let i=0; i<lists.length; i++) {
             if (lists[i]["NAME"] == name) {
                 return true
@@ -22,7 +25,7 @@ function checkName(name, path, lists) {
         return false
     }
 
-    if (path.length === 0) {
+    if (pathRaw.length === 0) {
         for (let i=0; i<lists.length; i++) {
             if (lists[i]["NAME"] === name) {
                 return true
@@ -47,11 +50,11 @@ function checkName(name, path, lists) {
     }
 }
 
-export function checkFolder(name, path, gridItems) {
+export function checkFolder(name, pathRaw, gridItems) {
     let symbolRegex = /^[a-zA-Z0-9 ]*$/;
     if (!symbolRegex.exec(name)) {
         return "A Name can only consist of letters, numbers and spaces"
-    } else if (checkName(name, path, gridItems)) {
+    } else if (checkName(name, pathRaw, gridItems)) {
         return "That name already exists"
     } else {
         return false

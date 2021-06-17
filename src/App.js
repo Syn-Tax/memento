@@ -10,9 +10,19 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { getFiles } from './Utils/GetFiles';
 const electron = window.require('electron')
 const fs = electron.remote.require('fs')
+const path = electron.remote.require('path')
 
 // this must be from the point of view of the root folder
-const dataFolder = "./Data/"
+
+const appPath = electron.remote.app.getPath('userData');
+
+const dataFolder = path.join(appPath, "./Data/")
+
+console.log(appPath)
+if (!fs.existsSync(dataFolder)){
+    fs.mkdirSync(dataFolder);
+}
+
 let files = getFiles(dataFolder)
 
 function App() {

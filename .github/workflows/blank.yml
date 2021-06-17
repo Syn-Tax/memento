@@ -19,13 +19,10 @@ jobs:
         with:
           node-version: 10
 
-      - name: Build app
-        run: npm run build
-
       - name: Build/release Electron app
-        uses: samuelmeuli/action-electron-builder@
+        uses: samuelmeuli/action-electron-builder@v1
         env:
-          NODE_OPTIONS: '--max_old_space_size=4096'v1
+          NODE_OPTIONS: '--max_old_space_size=4096'
         with:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)

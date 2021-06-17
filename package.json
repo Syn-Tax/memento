@@ -2,6 +2,7 @@
   "name": "latin-testing",
   "version": "0.1.0",
   "homepage": "./",
+  "main": "public/electron.js",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -11,6 +12,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.6.3",
     "concurrently": "^5.3.0",
+    "electron-is-dev": "^2.0.0",
     "query-string": "^7.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -20,13 +22,10 @@
     "wait-on": "^5.2.1",
     "web-vitals": "^1.1.0"
   },
-  "main": "main.js",
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "postinstall": "electron-builder install-app-deps",
-    "electron-pack": "electron-builder build -c.extraMetadata.main=build/main.js --publish never"
+    "package": "electron-builder build --win --publish never",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": [
@@ -49,15 +48,12 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-react": "^7.14.5",
-    "@electron-forge/cli": "^6.0.0-beta.57",
     "babel-loader": "8.1.0",
     "electron": "^11.2.3",
-    "electron-builder": "^22.11.7"
+    "electron-builder": "^22.11.7",
+    "electron-prebuilt-compile": "8.2.0"
   },
   "build": {
-    "files": [
-      "build/**/*",
-     "node_modules/**/*"
-    ]
-}
+    "files": ["**/*"]
+  }
 }
