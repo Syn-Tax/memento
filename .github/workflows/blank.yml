@@ -20,6 +20,6 @@ jobs:
 
       - uses: softprops/action-gh-release@v1
         with:
-          files: "*.exe"
+          files: "./dist/*.exe"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
