@@ -19,7 +19,8 @@ jobs:
       - run: npm run package
 
       - uses: softprops/action-gh-release@v1
-        prerelease: true
-        files: *.exe
+        with:
+          prerelease: true
+          files: *.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
