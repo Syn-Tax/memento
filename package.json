@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
     "babel-loader": "8.1.0",
     "electron": "^11.2.3",
@@ -54,6 +55,8 @@
     "electron-prebuilt-compile": "8.2.0"
   },
   "build": {
-    "files": ["**/*"]
+    "files": [
+      "**/*"
+    ]
   }
 }
