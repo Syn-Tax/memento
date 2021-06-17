@@ -1,33 +1,26 @@
 name: Build/release
 
-on: push
+on: 
+  push:
+    tags:
+      - 'v*.*.*'
 
 jobs:
-  release:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+  release-windows:
+    runs-on: windows-latest
 
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v1
-
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 14
+      - run: npm ci
+      - run: npm run build
+      - run: npm run package
 
-      - name: Build/release Electron app
-        uses: samuelmeuli/action-electron-builder@v1
-        env:
-          NODE_OPTIONS: '--max_old_space_size=4096'
-        with:
-          # GitHub token, automatically provided to the action
-          # (No need to define this secret in the repo settings)
-          github_token: ${{ secrets.github_token }}
-
-          # If the commit is tagged with a version (e.g. "v1.0.0"),
-          # release the app after building
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+      - uses: softprops/action-gh-release@v1
+          prerelease: true
+          files:
+            *.exe
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
