@@ -5,6 +5,7 @@ const path = require('path')
 const isDev = require('electron-is-dev');
 
 function createWindow () {
+  nativeTheme.themeSource = 'light'
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -13,11 +14,11 @@ function createWindow () {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
       enableRemoteModule: true
-    }
+    },
+    preload: path.join(__dirname, "preload.js")
   })
 
   mainWindow.removeMenu()
-  nativeTheme.themeSource = 'light'
 
   // and load the index.html of the app.
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`)
