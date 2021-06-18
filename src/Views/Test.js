@@ -112,11 +112,11 @@ function Test(props) {
         <div>
             <Link to={parent_path}><BackButton /></Link>
             <div>
-                <div style={{ opacity: 0.7, paddingTop: "20%", fontSize: "14pt" }}>Write the answer below</div>
-                <div style={{ paddingTop: "1%", fontSize: "20pt" }}>{question["TITLE"]}</div>
+                <div style={{ opacity: 0.7, paddingTop: "20%", fontSize: "20pt" }}>Write the answer below</div>
+                <div style={{ paddingTop: "1%", fontSize: "50pt" }}>{question["TITLE"]}</div>
                 <Grid container style={{ position: "absolute", bottom: "10%" }}>
                     <Grid item xs={4}></Grid>
-                    <Grid item xs={4}><TextField autoFocus variant="outlined" value={answer} label="Answer" onKeyPress={keyPress} onChange={handleAnswerChange} style={{ width: "100%" }} /></Grid>
+                    <Grid item xs={4}><TextField autoFocus variant="outlined" value={answer} label="Answer" onKeyPress={keyPress} onChange={handleAnswerChange} style={{ width: "100%", height: "10vh" }} /></Grid>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={1}>
                         <Fab variant="extended" onClick={submit} style={{ backgroundColor: "white" }}>Submit</Fab>
