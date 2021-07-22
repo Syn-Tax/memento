@@ -1,6 +1,6 @@
 import React from 'react';
-import { useHistory, useParams, Link } from 'react-router-dom';
-import { TextField, Grid} from '@material-ui/core';
+import { useParams, Link } from 'react-router-dom';
+import { TextField } from '@material-ui/core';
 import { checkFolder } from '../Utils/CreateFolder';
 import { saveList } from '../Utils/List';
 import BackButton from '../Components/BackButton';
@@ -73,7 +73,7 @@ function CreateList(props) {
 
     return (
         <div>
-            <Link to={pathStr=="Home" ? "/" : `/folder/${pathStr}`}><BackButton /></Link>
+            <Link to={pathStr==="Home" ? "/" : `/folder/${pathStr}`}><BackButton /></Link>
             <form onSubmit={onSave} style={{ paddingTop: "5%" }}>
                 <SaveButton />
                 <TextField onChange={nameChange} value={name} variant="outlined" label={invalidName ? "Error" : "Name"} error={invalidName} helperText={invalidName ? errorMessage : ""} style={{ width: "25%" }} />

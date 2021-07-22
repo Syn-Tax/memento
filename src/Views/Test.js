@@ -68,7 +68,7 @@ function Test(props) {
     }
 
     const isEnd = () => {
-        if (queryStr["question"] == "none") {
+        if (queryStr["question"] === "none") {
             return false
         } else {
             return queryStr["question"] < numQuestions
