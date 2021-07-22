@@ -3,7 +3,6 @@ import NavbarToggle from '../Components/NavbarToggle'
 import Welcome from '../Components/Welcome';
 import CreateListFab from '../Components/CreateListFab';
 import SortMenu from '../Components/SortMenu';
-import ViewMenu from '../Components/ViewMenu';
 import ListGrid from '../Components/ListGrid';
 
 import { Grid } from '@material-ui/core';

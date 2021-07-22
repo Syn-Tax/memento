@@ -1,24 +1,10 @@
 import React from 'react';
-import { useTransition, animated } from 'react-spring';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Fab, Menu, MenuItem } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import { makeStyles } from '@material-ui/core/styles';
-
-const styles = makeStyles({
-    menu: {
-        backgroundColor: "white",
-        width: "50vh",
-        height: "50vh",
-        top: 0,
-        left: 0
-    }
-})
 
 function CreateListFab(props) {
     const [anchorEl, setAnchorEl] = React.useState(null)
-    const [showMenu, setShowMenu] = React.useState(false)
-    const classes = styles()
     const history = useHistory()
 
     const OpenMenu = (event) => {

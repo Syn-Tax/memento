@@ -1,28 +1,13 @@
 import React from 'react';
-import { useTransition, animated } from 'react-spring';
-import { Link, useHistory } from 'react-router-dom';
 import { Fab, Menu, MenuItem } from '@material-ui/core';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
-import { makeStyles } from '@material-ui/core/styles';
-
-const styles = makeStyles({
-    menu: {
-        backgroundColor: "white",
-        width: "50vh",
-        height: "50vh",
-        top: 0,
-        left: 0
-    }
-})
 
 const options = {"text": "TEXT", "image": "IMAGE", "mixed": "BOTH"}
 
 function QuestionMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null)
     const [selected, setSelected] = React.useState("text")
-    const classes = styles()
-    const history = useHistory()
 
     const OpenMenu = (event) => {
         setAnchorEl(event.currentTarget)

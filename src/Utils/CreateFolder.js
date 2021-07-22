@@ -6,7 +6,7 @@ const dataFolder = path.join(electron.remote.app.getPath('userData'), "./Data")
 
 export function createFolder(name, pathRaw) {
     let pathFinal
-    if (pathRaw[0] == "Home") {
+    if (pathRaw[0] === "Home") {
         pathFinal = path.join(dataFolder, name)
     } else {
         pathFinal = path.join(dataFolder, pathRaw.join("/"), name)
@@ -18,7 +18,7 @@ export function createFolder(name, pathRaw) {
 function checkName(name, pathRaw, lists) {
     if (pathRaw[0] === "Home") {
         for (let i=0; i<lists.length; i++) {
-            if (lists[i]["NAME"] == name) {
+            if (lists[i]["NAME"] === name) {
                 return true
             } 
         }
@@ -40,7 +40,7 @@ function checkName(name, pathRaw, lists) {
             continue
         }
         let pth = item["PATH"].split("-")
-        if (pth[pth.length-1] == path[0]) {
+        if (pth[pth.length-1] === path[0]) {
 
             path.shift()
             pth.pop()

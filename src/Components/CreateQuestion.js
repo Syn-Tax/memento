@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextField, Grid, Fab } from "@material-ui/core";
-import QuestionMenu from '../Components/QuestionMenu';
 import SetQuestion from '../Components/SetQuestion';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -9,10 +8,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 function CreateQuestion(props) {
     const [invalidAnswer, setInvalidAnswer] = React.useState(false)
-    const [type, setType] = React.useState("text")
+    const [type] = React.useState("text")
 
     const answerChange = (event, index) => {
-        let symbolRegex = /^[a-zA-Z0-9-*\/&^#@()\[\]=+_\\., ]*$/;
+        let symbolRegex = /^[a-zA-Z0-9-*/&^#@()[\]=+_\\., ]*$/;
         if (!symbolRegex.exec(event.target.value)) {
             setInvalidAnswer(true)
         } else {

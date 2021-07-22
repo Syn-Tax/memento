@@ -16,7 +16,7 @@ function CreateFolder(props) {
         event.preventDefault()
         if (!isInvalid) {
             createFolder(event.target["0"].value, pathStr.split("-"))
-            if (pathStr == "Home") {
+            if (pathStr === "Home") {
                 history.push("/")
             } else {
                 history.push(`/folder/${pathStr}`)
@@ -37,7 +37,7 @@ function CreateFolder(props) {
 
     return (
         <div>
-            <div style={{ paddingTop: "2%" }}><Link to={pathStr=="Home" ? "/" : `/folder/${pathStr}`}><BackButton /></Link>Enter Folder Name</div>
+            <div style={{ paddingTop: "2%" }}><Link to={pathStr==="Home" ? "/" : `/folder/${pathStr}`}><BackButton /></Link>Enter Folder Name</div>
             <form style={{ paddingTop: "5%" }} onSubmit={handleSubmit} >
                 <TextField onChange={handleChange} variant="outlined" label={isInvalid ? "Error" : "Enter Folder Name"} error={isInvalid} helperText={isInvalid ? errorMessage : ""} style={{ position: 'relative', width: "25%" }} />
                 <Button variant="contained" type="submit" style={{ position: 'absolute', top: "20%", left: "47.5%" }} >Save</Button>
