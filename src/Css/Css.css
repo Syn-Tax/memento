@@ -1,0 +1,35 @@
+.fixed {
+    position: fixed;
+}
+
+.bg-opacity-0 {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.top-0 {
+    top: 0;
+}
+
+.right-0 {
+    right: 0;
+}
+
+.w-3\/4 {
+    width: 75%;
+}
+
+.w-1\/4 {
+    width: 25%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.z-50 {
+    z-index: 50;
+}
+
+.p-3 {
+    padding: 0.75rem;
+}
