@@ -4,7 +4,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { Fab, Menu, MenuItem } from '@material-ui/core';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
-import '../Css/tailwind.css';
 import { makeStyles } from '@material-ui/core/styles';
 
 const styles = makeStyles({

@@ -3,7 +3,6 @@ import { useTransition, animated } from 'react-spring';
 import { Link, useHistory } from 'react-router-dom';
 import { Fab, Menu, MenuItem } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import '../Css/tailwind.css';
 import { makeStyles } from '@material-ui/core/styles';
 
 const styles = makeStyles({

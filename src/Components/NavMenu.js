@@ -5,7 +5,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
 import FolderIcon from '@material-ui/icons/Folder';
-import '../Css/tailwind.css';
 import { makeStyles } from '@material-ui/core/styles';
 
 const styles = makeStyles({
