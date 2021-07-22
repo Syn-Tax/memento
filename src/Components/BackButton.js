@@ -1,4 +1,4 @@
-import { Box, Fab } from '@material-ui/core';
+import { Fab } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 function BackButton() {

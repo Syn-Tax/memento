@@ -1,4 +1,4 @@
-import { Box, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import ListItem from './ListItem';
 
 
@@ -18,10 +18,6 @@ function ListGrid(props) {
 
     items.push([])
     // console.log(items)
-
-    const openList = (list) => {
-        console.log(list)
-    }
 
     return (
         <div>

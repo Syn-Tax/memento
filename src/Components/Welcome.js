@@ -1,6 +1,3 @@
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronRight from '@material-ui/icons/ChevronRight'
-import { Paper, Grid, Box, Button, makeStyles, IconButton, colors } from '@material-ui/core';
 
 function Welcome() {
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Fab } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
 function SetQuestion(props) {
     if (props.type === "text") {
