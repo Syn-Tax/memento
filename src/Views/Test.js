@@ -3,7 +3,7 @@ import { useLocation, useParams, Link, useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 import { loadList } from '../Utils/List';
 import BackButton from '../Components/BackButton';
-import { TextField, Grid, Fab, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, Button } from '@material-ui/core';
+import { TextField, Grid, Fab, Dialog, DialogActions, DialogTitle, Button } from '@material-ui/core';
 
 const timeLimits = {"slow": 15,
                     "medium": 10,
@@ -40,10 +40,10 @@ function Test(props) {
         return () => {
             clearTimeout(interval);
         };
-    }, [time]);
+    }, [time]); // eslint-disable-line
 
     const incrementTime = () => {
-        if (queryStr["speed"] != 1) {
+        if (queryStr["speed"] !== 1) {
             setTime(time + 1)
             console.log(time)
 

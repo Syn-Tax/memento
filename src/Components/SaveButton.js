@@ -1,4 +1,4 @@
-import { Box, Fab } from '@material-ui/core';
+import { Fab } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 
 function BackButton() {

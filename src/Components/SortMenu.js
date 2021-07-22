@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, MenuItem, Button, Fab } from '@material-ui/core';
+import { Menu, MenuItem, Fab } from '@material-ui/core';
 import SortByAlphaIcon from '@material-ui/icons/SortByAlpha';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';

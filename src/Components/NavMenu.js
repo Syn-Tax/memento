@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, IconButton, Divider, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Box, Divider, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
 import FolderIcon from '@material-ui/icons/Folder';
@@ -21,7 +20,7 @@ const styles = makeStyles({
 const sortMethod = "NAME"
 
 function NavMenu(props) {
-    const [selectedItem, setSelectedItem] = React.useState(0);
+    // const [selectedItem, setSelectedItem] = React.useState(0);
     const classes = styles()
 
     props.lists.sort((a, b) => ((a[sortMethod] < b[sortMethod]) ? -1 : (a[sortMethod] > b[sortMethod]) ? 1 : 0))
@@ -29,7 +28,7 @@ function NavMenu(props) {
     let lists = []
 
     for (let i=0; i<props.lists.length; i++) {
-        if (props.lists[i]["TYPE"] == 'Folder') {
+        if (props.lists[i]["TYPE"] === 'Folder') {
             lists.push(props.lists[i])
         }
     }

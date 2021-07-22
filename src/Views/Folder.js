@@ -1,10 +1,8 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import NavbarToggle from '../Components/NavbarToggle'
-import Welcome from '../Components/Welcome';
 import CreateListFab from '../Components/CreateListFab';
 import SortMenu from '../Components/SortMenu';
-import ViewMenu from '../Components/ViewMenu';
 import ListGrid from '../Components/ListGrid';
 import BackButton from '../Components/BackButton';
 
@@ -36,7 +34,7 @@ function getPath(path, lists, parent) {
         // console.log(pth)
         // console.log(i)
 
-        if (pth[pth.length-1] == path[0]) {
+        if (pth[pth.length-1] === path[0]) {
 
             path.shift()
             pth.pop()
@@ -62,7 +60,7 @@ function Folder(props) {
 
     let parentPath
 
-    if (parent == "/" || parent == "") {
+    if (parent === "/" || parent === "") {
         parentPath = "/"
     } else {
         parentPath = `/folder/${parent}`

@@ -1,6 +1,5 @@
 import React from 'react';
-import queryString from 'query-string';
-import { useParams, useHistory, useLocation, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Box, Grid, makeStyles, Fab } from '@material-ui/core';
 import { loadList } from '../Utils/List';
 import BackButton from '../Components/BackButton';
