@@ -1,6 +1,6 @@
 {
   "name": "latin-testing",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "homepage": "./",
   "main": "public/electron.js",
   "private": true,
