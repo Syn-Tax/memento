@@ -3,7 +3,7 @@ import { useTransition, animated } from 'react-spring';
 import MenuIcon from '@material-ui/icons/Menu';
 import NavMenu from './NavMenu';
 import { Box, IconButton } from '@material-ui/core';
-import '../Css/tailwind.css';
+import '../Css/Css.css';
 
 function NavbarToggle(props) {
     const [showMenu, setShowMenu] = React.useState(false)
