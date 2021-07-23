@@ -1,6 +1,10 @@
 {
   "name": "latin-testing",
   "version": "0.1.13",
+  "author": {
+    "name": "Oscar Morris",
+    "email": "twocap06@gmail.com"
+  },
   "homepage": "./",
   "main": "public/electron.js",
   "private": true,
