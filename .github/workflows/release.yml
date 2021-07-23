@@ -40,8 +40,25 @@ jobs:
           name: linux-release
           path: "dist/*.deb"
 
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: npm install
+      - run: npm run build
+      - run: npm run package
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: macos-release
+          path: "dist/*.dmg"
+
   release:
-    needs: [build-linux, build-windows]
+    needs: [build-linux, build-windows, build-macos]
     runs-on: ubuntu-latest
 
     steps:
@@ -53,6 +70,10 @@ jobs:
         with:
           name: linux-release
           path: linux-release
+      - uses: actions/download-artifact@v2
+        with:
+          name: macos-release
+          path: macos-release
 
       - uses: softprops/action-gh-release@v1
         env:
@@ -62,3 +83,4 @@ jobs:
           files: |
             windows-release/*
             linux-release/*
+            macos-release/*
