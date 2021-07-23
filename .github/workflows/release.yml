@@ -41,6 +41,7 @@ jobs:
           path: "dist/*.deb"
 
   release:
+    needs: [build-linux, build-windows]
     runs-on: ubuntu-latest
 
     steps:
