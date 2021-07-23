@@ -6,12 +6,8 @@ on:
       - 'v*.*.*'
 
 jobs:
-  release:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+  build-windows:
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -22,11 +18,46 @@ jobs:
       - run: npm run build
       - run: npm run package
 
-      - uses: softprops/action-gh-release@v1
+      - uses: actions/upload-artifact@v2
         with:
-          files: |
-            "./dist/*.exe"
-            "./dist/*.dmg"
-            "./dist/*.deb"
+          name: windows-release
+          path: "dist/*.exe"
+
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: npm install
+      - run: npm run build
+      - run: npm run package
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: linux-release
+          path: "dist/*.deb"
+
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: windows-release
+          path: windows-release
+      - uses: actions/download-artifact@v2
+        with:
+          name: linux-release
+          path: linux-release
+
+      - uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          prerelease: true
+          files: |
+            windows-release/*
+            linux-release/*
