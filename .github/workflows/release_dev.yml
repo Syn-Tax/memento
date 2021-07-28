@@ -2,11 +2,8 @@ name: Build/release
 
 on: 
   push:
-    branch:
-      - dev
-  pull_request:
-    branch:
-      - dev
+    tags:
+      - "v.*-dev"
 
 jobs:
   build-windows:
