@@ -9,7 +9,7 @@ function dumpStr(questions) {
 
     for (let i=0; i<questions.length; i++) {
         let answers = questions[i]["ANSWERS"]
-        let line = questions[i]["TYPE"]+"\t"+questions[i]["TITLE"]+"\t"+answers.join(";")+"\n"
+        let line = questions[i]["TYPE"]+"\t"+questions[i]["TITLE"]+"\t"+answers.join(";")+"\t"+questions[i]["CORRECT"]+"\n"
         console.log("answers", answers)
         output += line
     }
