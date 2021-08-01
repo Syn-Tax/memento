@@ -69,16 +69,17 @@ function List(props) {
                 <Grid item xs={5}>
                     <Box boxShadow={10} style={{ width: "35vw", height: "90vh", left: "4%", backgroundColor: "white", position: "absolute", borderRadius: "20px" }}>
                         <Grid container style={{ paddingTop: "5%", fontSize: "14pt" }}>
-                            <Grid item xs={5}>Question</Grid>
-                            <Grid item xs={2}></Grid>
-                            <Grid item xs={5}>Answers</Grid>
+                            <Grid item xs={3}>Question</Grid>
+                            <Grid item xs={4}>Multiple Choice</Grid>
+                            <Grid item xs={5}>Correct Answer(s)</Grid>
                         </Grid>
                         {questions.map((question, i) => {
                             return (
                                 <Grid container style={{ paddingTop: "3%" }}>
-                                    <Grid item xs={5}>{question["TITLE"]}</Grid>
-                                    <Grid item xs={2}></Grid>
-                                    <Grid item xs={5}>{question["ANSWERS"].join(";")}</Grid>
+                                    <Grid item xs={3}>{question["TITLE"]}</Grid>
+                                <Grid item xs={4}>{question["TYPE"] === "multi" ? "yes" : "no"}</Grid>
+
+                                  {question["TYPE"] === "multi" ? <Grid item xs={5}>{question["ANSWERS"][question["CORRECT"]]}</Grid> : <Grid item xs={5}>{question["ANSWERS"].join(";")}</Grid>}
                                 </Grid>
                             )
                         })}
@@ -111,7 +112,7 @@ function List(props) {
                         </div>
 
                         <div style={{ paddingTop: "5%" }}>
-                            <h1 style={{ paddingBottom: "2%" }}>Given Question find answer, or reverse?</h1>
+                            <h1 style={{ paddingBottom: "2%" }}>Given Question find answer, or reverse? (NOT WORKING)</h1>
                             <ToggleButtonGroup exclusive value={type} onChange={handleType}>
                                 <ToggleButton value="normal" classes={{root: classes.root, selected: classes.selected}}>Normal</ToggleButton>
                                 <ToggleButton value="reverse" classes={{root: classes.root, selected: classes.selected}}>Reverse</ToggleButton>

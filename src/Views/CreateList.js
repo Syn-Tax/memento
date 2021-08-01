@@ -34,7 +34,7 @@ function CreateList(props) {
 
     const newItem = () =>{
         let qs = questions
-        qs.push({"TITLE": "", "TYPE": "text", "ANSWERS": [""]})
+        qs.push({"TITLE": "", "TYPE": "text", "ANSWERS": [""], "CORRECT": 0})
         setQuestions([...qs])
         console.log(questions)
     }
@@ -71,6 +71,18 @@ function CreateList(props) {
         setQuestions([...qs])
     }
 
+    const setCorrect = (questionIndex, correctIndex) => {
+        let qs = questions
+        qs[questionIndex]["CORRECT"] = correctIndex
+        setQuestions([...qs])
+    }
+
+    const setType = (questionIndex, type) => {
+        let qs = questions
+        qs[questionIndex]["TYPE"] = type
+        setQuestions([...qs])
+    }
+
     return (
         <div>
             <Link to={pathStr==="Home" ? "/" : `/folder/${pathStr}`}><BackButton /></Link>
@@ -79,7 +91,7 @@ function CreateList(props) {
                 <TextField onChange={nameChange} value={name} variant="outlined" label={invalidName ? "Error" : "Name"} error={invalidName} helperText={invalidName ? errorMessage : ""} style={{ width: "25%" }} />
 
                 {questions.map((question, i) => {
-                    return <CreateQuestion question={question} addAnswer={() => (addAnswer(i))} removeAnswer={() => (removeAnswer(i))} deleteQuestion={() => (deleteQuestion(i))} titleChange={(e) => (titleChange(i, e))} answerChange={(j, e) => (answerChange(i, j, e))} />
+                    return <CreateQuestion question={question} addAnswer={() => (addAnswer(i))} removeAnswer={() => (removeAnswer(i))} deleteQuestion={() => (deleteQuestion(i))} titleChange={(e) => (titleChange(i, e))} answerChange={(j, e) => (answerChange(i, j, e))} setCorrect={(j) => (setCorrect(i, j))} setType={(t) => (setType(i, t))} />
                 })}
 
                 <CreateQuestionFab onClick={newItem} />

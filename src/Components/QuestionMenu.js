@@ -3,7 +3,7 @@ import { Fab, Menu, MenuItem } from '@material-ui/core';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 
-const options = {"text": "TEXT", "image": "IMAGE", "mixed": "BOTH"}
+const options = {"text": "TEXT", "image": "IMAGE", "mixed": "BOTH", "multi": "CHOICE"}
 
 function QuestionMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null)
@@ -31,6 +31,12 @@ function QuestionMenu(props) {
         setSelected("mixed")
     }
 
+    const handleMultiItemClick = (event) => {
+        setAnchorEl(null)
+        props.setValue('multi')
+        setSelected("multi")
+    }
+
     const CloseMenu = () => {
         setAnchorEl(null);
     }
@@ -46,11 +52,8 @@ function QuestionMenu(props) {
                 <MenuItem style={{ width: 150, fontSize: 14 }} onClick={handleTextItemClick}>
                     {options["text"]}
                 </MenuItem>
-                <MenuItem style={{ width: 150, fontSize: 14 }} onClick={handleImageItemClick}>
-                    {options["image"]}
-                </MenuItem>
-                <MenuItem style={{ width: 150, fontSize: 14 }} onClick={handleMixedItemClick}>
-                    {options["mixed"]}
+                <MenuItem style={{ width: 150, fontSize: 14 }} onClick={handleMultiItemClick}>
+                    {options["multi"]}
                 </MenuItem>
             </Menu>
         </div>
