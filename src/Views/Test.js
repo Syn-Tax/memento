@@ -3,6 +3,8 @@ import { useLocation, useParams, Link, useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 import { loadList } from '../Utils/List';
 import BackButton from '../Components/BackButton';
+import SubmitAnswer from '../Components/SubmitAnswer';
+import MultiAnswer from '../Components/MultiAnswer';
 import { TextField, Grid, Fab, Dialog, DialogActions, DialogTitle, Button } from '@material-ui/core';
 
 const timeLimits = {"slow": 15,
@@ -16,7 +18,6 @@ function Test(props) {
     const questions = loadList(pathStr)
     const [question, setQuestion] = React.useState(questions[Math.floor(Math.random()*questions.length)])
     const [numQuestions, setNumQuestions] = React.useState(0)
-    const [answer, setAnswer] = React.useState("")
     const [time, setTime] = React.useState(1)
     const [timeDialog, setTimeDialog] = React.useState(false)
     const [continueDialog, setContinueDialog] = React.useState(false)
@@ -45,7 +46,6 @@ function Test(props) {
     const incrementTime = () => {
         if (queryStr["speed"] !== 1) {
             setTime(time + 1)
-            console.log(time)
 
             if (time > timeLimits[queryStr["speed"]]) {
                 setTimeDialog(true)
@@ -58,7 +58,6 @@ function Test(props) {
     }
 
     const continueFunc = () => {
-        setAnswer("")
         setTime(1)
         handleDialogClose()
         if (isEnd()) {
@@ -85,27 +84,9 @@ function Test(props) {
         setNumQuestions(numQuestions+1)
     }
 
-    const handleAnswerChange = (e) => {
-        setAnswer(e.target.value)
-    }
-
-    const submit = (e) => {
-        console.log("Submitted", answer)
-        if (question["ANSWERS"].includes(answer)) {
-            console.log("Correct")
-            setCorrect(true)
-            setContinueDialog(true)
-        } else {
-            setCorrect(false)
-            setContinueDialog(true)
-            console.log("Incorrect")
-        }
-    }
-
-    const keyPress = (e) => {
-        if (e.key === 'Enter') {
-            submit()
-        }
+    const correctAnswer = (value) => {
+        setCorrect(value)
+        setContinueDialog(true)
     }
 
     return (
@@ -114,14 +95,10 @@ function Test(props) {
             <div>
                 <div style={{ opacity: 0.7, paddingTop: "20%", fontSize: "20pt" }}>Write the answer below</div>
                 <div style={{ paddingTop: "1%", fontSize: "50pt" }}>{question["TITLE"]}</div>
-                <Grid container style={{ position: "absolute", bottom: "10%" }}>
-                    <Grid item xs={4}></Grid>
-                    <Grid item xs={4}><TextField autoFocus variant="outlined" value={answer} label="Answer" onKeyPress={keyPress} onChange={handleAnswerChange} style={{ width: "100%", height: "10vh" }} /></Grid>
-                    <Grid item xs={1}></Grid>
-                    <Grid item xs={1}>
-                        <Fab variant="extended" onClick={submit} style={{ backgroundColor: "white" }}>Submit</Fab>
-                    </Grid>
-                </Grid>
+                {question["TYPE"] === "multi"
+                 ? <MultiAnswer question={question} correctAnswer={correctAnswer} />
+                 : <SubmitAnswer question={question} correctAnswer={correctAnswer} />
+                }
             </div>
 
             <Dialog open={continueDialog} onClose={handleDialogClose} >

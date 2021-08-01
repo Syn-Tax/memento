@@ -10,7 +10,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 function CreateQuestion(props) {
     const [invalidAnswer, setInvalidAnswer] = React.useState(false)
-    const [correct, setCorrect] = React.useState(null)
 
     const answerChange = (event, index) => {
         let symbolRegex = /^[a-zA-Z0-9-*/&^#@()[\]=+_\\., ]*$/;
@@ -32,7 +31,7 @@ function CreateQuestion(props) {
           <Grid item xs={3}>
             <SetQuestionBlock type={props.question["TYPE"]} value={props.question["TITLE"]} change={props.titleChange} />
           </Grid>
-          <QuestionBlock type={props.question["TYPE"]} question={props.question} invalidAnswer={invalidAnswer} answerChange={answerChange} setCorrect={setCorrect} />
+          <QuestionBlock type={props.question["TYPE"]} question={props.question} invalidAnswer={invalidAnswer} answerChange={answerChange} setCorrect={props.setCorrect} />
           <Grid item container xs={1} spacing={3}>
             <Fab display="inline" size="small" style={{ backgroundColor: "white", top: "2vh" }} onClick={props.addAnswer}><AddIcon style={{ opacity: 0.7 }} /></Fab>
             <Fab display="inline" size="small" style={{ backgroundColor: "white", top: "2vh", left: "20%" }} onClick={props.removeAnswer}><RemoveIcon style={{ opacity: 0.7 }} /></Fab>

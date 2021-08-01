@@ -6,30 +6,22 @@ As the name implies (latin for remember), this is an application to assist in th
 
 ## Windows
 
-Go to the releases page - (https://github.com/Syn-Tax/memento/releases)[https://github.com/Syn-Tax/memento/releases] - and download the Memento.Setup.X.X.X.exe file and run it to install Memento to your computer
+Go to the releases page - https://github.com/Syn-Tax/memento/releases - and download the Memento.Setup.X.X.X.exe file and run it to install Memento to your computer
 
 ## MacOS
 
-Go to the releases page - (https://github.com/Syn-Tax/memento/releases)[https://github.com/Syn-Tax/memento/releases] - and download the Memento-X.X.X.dmg file. Then follow the instructions (here)[https://www.wikihow.com/Install-Software-from-Unsigned-Developers-on-a-Mac] to install unsigned software to your mac.
+Go to the releases page - https://github.com/Syn-Tax/memento/releases - and download the Memento-X.X.X.dmg file. Then follow the instructions at https://www.wikihow.com/Install-Software-from-Unsigned-Developers-on-a-Mac to install unsigned software to your mac.
 
 ## Ubuntu/Debian
 
-Go to the releases page - (https://github.com/Syn-Tax/memento/releases)[https://github.com/Syn-Tax/memento/releases] - and download the .deb file, then run it and install it with the software center or run `sudo dpkg -i [NAME_OF_FILE_HERE]`, or use your preferred way of installing .deb files.
+Go to the releases page - https://github.com/Syn-Tax/memento/releases - and download the .deb file, then run it and install it with the software center or run `sudo dpkg -i [NAME_OF_FILE_HERE]`, or use your preferred way of installing .deb files.
 
 # Changelog
 
-## Stable
-
-### v1.0.0
+## v1.0.0
 
 Features:
 
 - Material design User Interface
 - Allows for creation of custom folders and lists
 - Create your own lists of questions to memorise anything you want.
-
-## Development
-
-### v1.0.0
-
-Same as stable.
