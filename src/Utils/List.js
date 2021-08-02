@@ -9,7 +9,14 @@ function dumpStr(questions) {
 
     for (let i=0; i<questions.length; i++) {
         let answers = questions[i]["ANSWERS"]
-        let line = questions[i]["TYPE"]+"\t"+questions[i]["TITLE"]+"\t"+answers.join(";")+"\n"
+        let line
+
+        if (questions[i]["TYPE"] === "text") {
+            line = questions[i]["TYPE"]+"\t"+questions[i]["TITLE"]+"\t"+answers.join(";")+"\n"
+        } else if (questions[i]["TYPE"] === "multi") {
+            line = questions[i]["TYPE"]+"\t"+questions[i]["TITLE"]+"\t"+answers.join(";")+"\t"+questions[i]["CORRECT"]+"\n"
+        }
+
         console.log("answers", answers)
         output += line
     }
@@ -24,8 +31,11 @@ function loadStr(string) {
 
     for (let i=0; i<lines.length; i++) {
         const params = lines[i].split("\t")
+
         if (params[0] === "text") {
-            questions.push({"TITLE": params[1], "TYPE": "text", "ANSWERS": params[2].split(";")})
+            questions.push({"TITLE": params[1], "TYPE": params[0], "ANSWERS": params[2].split(";")})
+        } else if (params[0] === "multi") {
+            questions.push({"TITLE": params[1], "TYPE": params[0], "ANSWERS": params[2].split(";"), "CORRECT": parseInt(params[3])})
         }
     }
 

@@ -2,11 +2,9 @@ name: Build/release
 
 on: 
   push:
-    branch:
-      - main
-  pull_request:
-    branch:
-      - main
+    tags-ignore:
+      - "v.*.*.*-dev"
+
 
 jobs:
   build-windows:
