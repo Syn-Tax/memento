@@ -12,7 +12,6 @@ function CreateFolder(props) {
     const history = useHistory()
 
     const handleSubmit = (event) => {
-        // console.log(event.target["0"].value)
         event.preventDefault()
         if (!isInvalid) {
             createFolder(event.target["0"].value, pathStr.split("-"))

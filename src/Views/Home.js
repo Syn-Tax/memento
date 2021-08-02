@@ -19,7 +19,7 @@ function Home(props) {
 
       <Grid container style={{ top: "27%", position: "absolute", height: "73%" }}>
         <Grid item xs={3}>
-          <CreateListFab path="Home" />
+          <CreateListFab path="Home" gridItems={props.gridItems} />
         </Grid>
         <Grid item xs={6}></Grid>
         <Grid item xs={3} style={{display: 'flex', flexDirection: 'row'}} >
