@@ -10,6 +10,10 @@ function getPath(name){
 export function getFiles(dir) {
     let contents = []
     fs.readdirSync(dir).forEach(file => {
+        if (file.startsWith(".")) {
+            return
+        }
+
         let type = fs.lstatSync(dir + file).isDirectory() ? "Folder" : "List"
         if (type === "Folder") {
             let contains = getFiles(dir+file+"/")
