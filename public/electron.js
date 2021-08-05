@@ -1,8 +1,10 @@
 
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, nativeTheme} = require('electron')
+const {app, BrowserWindow, nativeTheme, protocol} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev');
+
+const dataFolder = path.join(app.getPath('userData'), "./Data")
 
 function createWindow () {
   nativeTheme.themeSource = 'light'
@@ -32,7 +34,13 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow()
-  
+
+  protocol.registerFileProtocol('imgid', (request, callback) => {
+    const url = request.url.substr(8)
+    console.log(url)
+    callback({path: path.join(dataFolder, ".images", url)})
+  })
+
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
