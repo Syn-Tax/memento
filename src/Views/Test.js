@@ -7,6 +7,11 @@ import SubmitAnswer from '../Components/SubmitAnswer';
 import MultiAnswer from '../Components/MultiAnswer';
 import { TextField, Grid, Fab, Dialog, DialogActions, DialogTitle, Button } from '@material-ui/core';
 
+const electron = window.require('electron')
+const path = electron.remote.require('path')
+
+const imgFolder = path.join(electron.remote.app.getPath('userData'), "./Data/.images")
+
 const timeLimits = {"slow": 15,
                     "medium": 10,
                     "fast": 5,
@@ -36,7 +41,7 @@ function Test(props) {
         parent_path = "/"
     }
 
-   React.useEffect(() => {
+    React.useEffect(() => {
         const interval = setTimeout(() => incrementTime(), 1000);
         return () => {
             clearTimeout(interval);
@@ -91,38 +96,39 @@ function Test(props) {
 
     return (
         <div>
-            <Link to={parent_path}><BackButton /></Link>
-            <div>
-                <div style={{ opacity: 0.7, paddingTop: "20%", fontSize: "20pt" }}>Write the answer below</div>
-                <div style={{ paddingTop: "1%", fontSize: "50pt" }}>{question["TITLE"]}</div>
-                {question["TYPE"] === "multi"
-                 ? <MultiAnswer question={question} correctAnswer={correctAnswer} />
-                 : <SubmitAnswer question={question} correctAnswer={correctAnswer} />
-                }
-            </div>
+          <Link to={parent_path}><BackButton /></Link>
+          <div>
+            <div style={{ opacity: 0.7, paddingTop: "20%", fontSize: "20pt" }}>Write the answer below</div>
+            <div style={{ paddingTop: "1%", fontSize: "50pt" }}>{question["TITLE"]}</div>
+            {question["IMAGE_ID"] && <div style={{ paddingTop: "5%" }}><img src={`imgid://${question["IMAGE_ID"]}`} style={{ height: "25vh" }} /></div>}
+            {question["TYPE"] === "multi"
+             ? <MultiAnswer question={question} correctAnswer={correctAnswer} />
+             : <SubmitAnswer question={question} correctAnswer={correctAnswer} />
+            }
+          </div>
 
-            <Dialog open={continueDialog} onClose={handleDialogClose} >
-                <DialogTitle>{`${correct ? "Well Done!" : "So Close!"} Do you wish to continue?`}</DialogTitle>
-                <DialogActions>
-                    <Button onClick={backButtonClick}>Back</Button>
-                    <Button onClick={continueFunc} autoFocus>Continue</Button>
-                </DialogActions>
-            </Dialog>
+          <Dialog open={continueDialog} onClose={handleDialogClose} >
+            <DialogTitle>{`${correct ? "Well Done!" : "So Close!"} Do you wish to continue?`}</DialogTitle>
+            <DialogActions>
+              <Button onClick={backButtonClick}>Back</Button>
+              <Button onClick={continueFunc} autoFocus>Continue</Button>
+            </DialogActions>
+          </Dialog>
 
-            <Dialog open={endDialog} onClose={backButtonClick} >
-                <DialogTitle>{"Well Done! You have made it to the end. Do you wish to continue?"}</DialogTitle>
-                <DialogActions>
-                    <Button onClick={backButtonClick} autoFocus>Continue</Button>
-                </DialogActions>
-            </Dialog>
+          <Dialog open={endDialog} onClose={backButtonClick} >
+            <DialogTitle>{"Well Done! You have made it to the end. Do you wish to continue?"}</DialogTitle>
+            <DialogActions>
+              <Button onClick={backButtonClick} autoFocus>Continue</Button>
+            </DialogActions>
+          </Dialog>
 
-            <Dialog open={timeDialog} onClose={handleDialogClose} >
-                <DialogTitle>{"You are out of time for this question. Do you wish to continue?"}</DialogTitle>
-                <DialogActions>
-                    <Button onClick={backButtonClick}>Back</Button>
-                    <Button onClick={continueFunc} autoFocus>Continue</Button>
-                </DialogActions>
-            </Dialog>
+          <Dialog open={timeDialog} onClose={handleDialogClose} >
+            <DialogTitle>{"You are out of time for this question. Do you wish to continue?"}</DialogTitle>
+            <DialogActions>
+              <Button onClick={backButtonClick}>Back</Button>
+              <Button onClick={continueFunc} autoFocus>Continue</Button>
+            </DialogActions>
+          </Dialog>
         </div>
     )
 }

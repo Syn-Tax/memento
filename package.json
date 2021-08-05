@@ -35,7 +35,7 @@
     "build": "react-scripts build",
     "start": "react-scripts start",
     "package": "electron-builder build --publish never",
-    "electron-dev": "concurrently \"BROWSER=none && npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "electron-dev-win": "concurrently \"set BROWSER=none && npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "start-server": "set BROWSER=none && npm start",
     "start-electron": "electron ."

@@ -12,8 +12,6 @@ const electron = window.require('electron')
 const fs = electron.remote.require('fs')
 const path = electron.remote.require('path')
 
-// this must be from the point of view of the root folder
-
 const appPath = electron.remote.app.getPath('userData');
 
 const dataFolder = path.join(appPath, "./Data/")
@@ -21,6 +19,10 @@ const dataFolder = path.join(appPath, "./Data/")
 console.log(appPath)
 if (!fs.existsSync(dataFolder)){
     fs.mkdirSync(dataFolder);
+}
+
+if (!fs.existsSync(path.join(dataFolder, "./.images"))) {
+    fs.mkdirSync(path.join(dataFolder, "./.images"))
 }
 
 let files = getFiles(dataFolder)

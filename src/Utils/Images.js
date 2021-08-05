@@ -17,7 +17,7 @@ function hexString(length) {
   return [...Array(length)].map(() => Math.floor(Math.random() * 16).toString(16)).join('')
 }
 
-function copyImg(pth) {
+export function copyImg(pth) {
   let hexstr = hexString(8)
 
   let existing = []

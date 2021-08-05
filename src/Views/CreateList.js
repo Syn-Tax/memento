@@ -83,6 +83,14 @@ function CreateList(props) {
         setQuestions([...qs])
     }
 
+    const setImage = (questionIndex, id, name) => {
+        console.log(name, id)
+        let qs = questions
+        qs[questionIndex]["IMAGE_ID"] = id
+        qs[questionIndex]["IMAGE_NAME"] = name
+        setQuestions([...qs])
+    }
+
     return (
         <div>
             <Link to={pathStr==="Home" ? "/" : `/folder/${pathStr}`}><BackButton /></Link>
@@ -91,7 +99,7 @@ function CreateList(props) {
                 <TextField onChange={nameChange} value={name} variant="outlined" label={invalidName ? "Error" : "Name"} error={invalidName} helperText={invalidName ? errorMessage : ""} style={{ width: "25%" }} />
 
                 {questions.map((question, i) => {
-                    return <CreateQuestion question={question} addAnswer={() => (addAnswer(i))} removeAnswer={() => (removeAnswer(i))} deleteQuestion={() => (deleteQuestion(i))} titleChange={(e) => (titleChange(i, e))} answerChange={(j, e) => (answerChange(i, j, e))} setCorrect={(j) => (setCorrect(i, j))} setType={(t) => (setType(i, t))} />
+                    return <CreateQuestion question={question} setImage={(id, name) => (setImage(i, id, name))} addAnswer={() => (addAnswer(i))} removeAnswer={() => (removeAnswer(i))} deleteQuestion={() => (deleteQuestion(i))} titleChange={(e) => (titleChange(i, e))} answerChange={(j, e) => (answerChange(i, j, e))} setCorrect={(j) => (setCorrect(i, j))} setType={(t) => (setType(i, t))} />
                 })}
 
                 <CreateQuestionFab onClick={newItem} />
