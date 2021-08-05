@@ -1,3 +1,8 @@
+# v1.2.0-dev
+
+Added Features:
+- Use images in questions
+
 # v1.1.1-dev
 
 Changed:

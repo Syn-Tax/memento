@@ -18,7 +18,7 @@ Go to the releases page - https://github.com/Syn-Tax/memento/releases - and down
 
 # Changelog
 
-## v1.1.1-dev
+## v1.2.0-dev
 
 Features:
 
@@ -26,6 +26,7 @@ Features:
 - Allows for creation of custom folders and lists
 - Create your own lists of questions to memorise anything you want.
 - Create text-based or multiple choice questions
+- Use images in questions
 
 Changes:
 
