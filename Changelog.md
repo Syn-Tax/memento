@@ -1,6 +1,17 @@
+# v1.3.0-dev
+
+Added Features:
+
+- allows for editing, deleting and moving lists within the editor
+
+Fixed:
+
+- nested folders
+
 # v1.2.0-dev
 
 Added Features:
+
 - Use images in questions
 
 # v1.1.1-dev
