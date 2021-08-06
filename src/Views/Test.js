@@ -33,6 +33,8 @@ function Test(props) {
 
     const queryStr = queryString.parse(search)
 
+    console.log(pathStr)
+
     let parent_path
 
     if (pathStr.split("-").length > 1) {

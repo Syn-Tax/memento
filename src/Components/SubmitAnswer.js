@@ -14,7 +14,7 @@ function SubmitAnswer(props) {
     if (props.question["ANSWERS"].includes(a)) {
       props.correctAnswer(true)
     } else {
-      props.CorrectAnswer(false)
+      props.correctAnswer(false)
     }
   }
 
