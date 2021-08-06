@@ -33,7 +33,7 @@ function CreateQuestion(props) {
           <SetQuestionText value={props.question["TITLE"]} change={props.titleChange} />
         </Grid>
         <Grid item xs={12}>
-          <SetQuestionImage setImage={props.setImage} />
+          <SetQuestionImage setImage={props.setImage} question={props.question} />
         </Grid>
       </Grid>
       <QuestionBlock type={props.question["TYPE"]} question={props.question} invalidAnswer={invalidAnswer} answerChange={answerChange} setCorrect={props.setCorrect} />

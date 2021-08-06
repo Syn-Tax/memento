@@ -1,8 +1,9 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import queryString from 'query-string'
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { TextField } from '@material-ui/core';
 import { checkFolder } from '../Utils/CreateFolder';
-import { saveList } from '../Utils/List';
+import { saveList, loadList } from '../Utils/List';
 import BackButton from '../Components/BackButton';
 import SaveButton from '../Components/SaveButton';
 import CreateQuestion from '../Components/CreateQuestion';
@@ -10,10 +11,32 @@ import CreateQuestionFab from '../Components/CreateQuestionFab';
 
 function CreateList(props) {
     const { pathStr } = useParams()
+    const { search } = useLocation()
     const [ questions, setQuestions ] = React.useState([])
+    const [ loadedQuestions, setLoadedQuestions ] = React.useState(false)
     const [ invalidName, setInvalidName ] = React.useState(false)
     const [ name, setName ] = React.useState("")
     const [ errorMessage, setErrorMessage ] = React.useState("")
+
+    let queryStr = queryString.parse(search)
+
+    if (queryStr["edit"] === "true") {
+        queryStr["edit"] = true
+    } else if (queryStr["edit"] === "false") {
+        queryStr["edit"] === false
+    }
+
+    if (!loadedQuestions && queryStr["edit"]) {
+        let qs
+        if (pathStr === "Home") {
+            qs = loadList(queryStr["list"])
+        } else {
+            qs = loadList(pathStr+queryStr["list"])
+        }
+        setQuestions(qs)
+        setName(queryStr["list"].substring(0, queryStr["list"].length-5))
+        setLoadedQuestions(true)
+    }
 
     const onSave = (event) => {
         event.preventDefault()

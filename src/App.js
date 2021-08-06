@@ -30,11 +30,25 @@ let files = getFiles(dataFolder)
 function App() {
     const [gridItems, setGridItems] = React.useState(files)
 
+    const recreateFiles = () => {
+        files = getFiles(dataFolder)
+        setGridItems(files)
+    }
+
     fs.watch(dataFolder, {recursive: true}, (event, file) => {
         files = getFiles(dataFolder)
         setGridItems(files)
     })
 
+    /*
+    let watcher = chokidar.watch(dataFolder)
+
+    watcher.on('all', (evt, name) => {
+        recreateFiles()
+    })
+
+    console.log(watcher.getWatched())
+    */
 
     return (
         <div className="App">

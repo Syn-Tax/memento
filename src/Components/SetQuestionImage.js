@@ -13,7 +13,7 @@ const dataFolder = path.join(appPath, "./Data/")
 const imagesFolder = path.join(dataFolder, "./.images")
 
 function SetQuestionImage(props) {
-  const [containsImage, setContainsImage] = React.useState(false)
+  const [containsImage, setContainsImage] = React.useState(props.question["IMAGE_ID"])
   const [currentId, setCurrentId] = React.useState(null)
 
   const browseImage = (e) => {

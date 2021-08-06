@@ -110,7 +110,7 @@ function List(props) {
 
                             </ToggleButtonGroup>
                         </div>
-
+                        { /*
                         <div style={{ paddingTop: "5%" }}>
                             <h1 style={{ paddingBottom: "2%" }}>Given Question find answer, or reverse? (NOT WORKING)</h1>
                             <ToggleButtonGroup exclusive value={type} onChange={handleType}>
@@ -119,6 +119,7 @@ function List(props) {
 
                             </ToggleButtonGroup>
                         </div>
+                          */ }
 
                         <div style={{ paddingTop: "5%" }}>
                         <Link to={`/test/${pathStr}?speed=${speed}&question=${question}&type=${type}`}><Fab variant="extended" style={{backgroundColor: "white"}}>START</Fab></Link>
