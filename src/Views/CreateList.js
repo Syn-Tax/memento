@@ -1,8 +1,9 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import queryString from 'query-string'
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { TextField } from '@material-ui/core';
 import { checkFolder } from '../Utils/CreateFolder';
-import { saveList } from '../Utils/List';
+import { saveList, loadList } from '../Utils/List';
 import BackButton from '../Components/BackButton';
 import SaveButton from '../Components/SaveButton';
 import CreateQuestion from '../Components/CreateQuestion';
@@ -10,10 +11,32 @@ import CreateQuestionFab from '../Components/CreateQuestionFab';
 
 function CreateList(props) {
     const { pathStr } = useParams()
+    const { search } = useLocation()
     const [ questions, setQuestions ] = React.useState([])
+    const [ loadedQuestions, setLoadedQuestions ] = React.useState(false)
     const [ invalidName, setInvalidName ] = React.useState(false)
     const [ name, setName ] = React.useState("")
     const [ errorMessage, setErrorMessage ] = React.useState("")
+
+    let queryStr = queryString.parse(search)
+
+    if (queryStr["edit"] === "true") {
+        queryStr["edit"] = true
+    } else if (queryStr["edit"] === "false") {
+        queryStr["edit"] === false
+    }
+
+    if (!loadedQuestions && queryStr["edit"]) {
+        let qs
+        if (pathStr === "Home") {
+            qs = loadList(queryStr["list"])
+        } else {
+            qs = loadList(pathStr+queryStr["list"])
+        }
+        setQuestions(qs)
+        setName(queryStr["list"].substring(0, queryStr["list"].length-5))
+        setLoadedQuestions(true)
+    }
 
     const onSave = (event) => {
         event.preventDefault()
@@ -83,6 +106,14 @@ function CreateList(props) {
         setQuestions([...qs])
     }
 
+    const setImage = (questionIndex, id, name) => {
+        console.log(name, id)
+        let qs = questions
+        qs[questionIndex]["IMAGE_ID"] = id
+        qs[questionIndex]["IMAGE_NAME"] = name
+        setQuestions([...qs])
+    }
+
     return (
         <div>
             <Link to={pathStr==="Home" ? "/" : `/folder/${pathStr}`}><BackButton /></Link>
@@ -91,7 +122,7 @@ function CreateList(props) {
                 <TextField onChange={nameChange} value={name} variant="outlined" label={invalidName ? "Error" : "Name"} error={invalidName} helperText={invalidName ? errorMessage : ""} style={{ width: "25%" }} />
 
                 {questions.map((question, i) => {
-                    return <CreateQuestion question={question} addAnswer={() => (addAnswer(i))} removeAnswer={() => (removeAnswer(i))} deleteQuestion={() => (deleteQuestion(i))} titleChange={(e) => (titleChange(i, e))} answerChange={(j, e) => (answerChange(i, j, e))} setCorrect={(j) => (setCorrect(i, j))} setType={(t) => (setType(i, t))} />
+                    return <CreateQuestion question={question} setImage={(id, name) => (setImage(i, id, name))} addAnswer={() => (addAnswer(i))} removeAnswer={() => (removeAnswer(i))} deleteQuestion={() => (deleteQuestion(i))} titleChange={(e) => (titleChange(i, e))} answerChange={(j, e) => (answerChange(i, j, e))} setCorrect={(j) => (setCorrect(i, j))} setType={(t) => (setType(i, t))} />
                 })}
 
                 <CreateQuestionFab onClick={newItem} />

@@ -12,8 +12,6 @@ const electron = window.require('electron')
 const fs = electron.remote.require('fs')
 const path = electron.remote.require('path')
 
-// this must be from the point of view of the root folder
-
 const appPath = electron.remote.app.getPath('userData');
 
 const dataFolder = path.join(appPath, "./Data/")
@@ -23,16 +21,34 @@ if (!fs.existsSync(dataFolder)){
     fs.mkdirSync(dataFolder);
 }
 
+if (!fs.existsSync(path.join(dataFolder, "./.images"))) {
+    fs.mkdirSync(path.join(dataFolder, "./.images"))
+}
+
 let files = getFiles(dataFolder)
 
 function App() {
     const [gridItems, setGridItems] = React.useState(files)
+
+    const recreateFiles = () => {
+        files = getFiles(dataFolder)
+        setGridItems(files)
+    }
 
     fs.watch(dataFolder, {recursive: true}, (event, file) => {
         files = getFiles(dataFolder)
         setGridItems(files)
     })
 
+    /*
+    let watcher = chokidar.watch(dataFolder)
+
+    watcher.on('all', (evt, name) => {
+        recreateFiles()
+    })
+
+    console.log(watcher.getWatched())
+    */
 
     return (
         <div className="App">

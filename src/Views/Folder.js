@@ -11,15 +11,14 @@ import { Grid } from '@material-ui/core';
 let count = 0
 
 function getPath(path, lists, parent) {
-    count ++
-    console.log(count)
-    console.log(lists)
-    console.log(path)
 
     if (path.length === 0) {
-        console.log("LISTS")
-        console.log(lists)
-        return {lists, parent}
+        if (lists) {
+            return {lists, parent}
+        } else {
+            let lst = []
+            return {lst, parent}
+        }
     }
 
     for (let i=0; i<lists.length; i++) {
@@ -28,7 +27,6 @@ function getPath(path, lists, parent) {
             continue
         }
         let pth = item["PATH"].split("-")
-
         if (pth[pth.length-1] === path[0]) {
 
             path.shift()
@@ -43,32 +41,27 @@ function Folder(props) {
     const [sortMethod, setSortMethod] = React.useState("TYPE")
     const { pathStr } = useParams()
     const path = pathStr.split("-")
-    console.log("URL")
+
     console.log(window.location.href)
-    console.log("PATH STRING")
-    console.log(pathStr)
+    console.log(path)
 
-    let pth = getPath(path, props.gridItems, "/")
-    console.log(pth)
-
-    let {lists, parent} = pth
 
     let parentPath
 
-    if (parent === "/" || parent === "") {
+    if (path.length === 1) {
         parentPath = "/"
     } else {
-        parentPath = `/folder/${parent}`
+        let parentPth = [...path]
+        parentPth.pop()
+        parentPath = `/folder/${parentPth.join('-')}`
     }
 
-    console.log("PARENT")
-    console.log(parent)
+    console.log(path)
+    let pth = getPath(path, props.gridItems, parentPath)
 
-    console.log("PARENT PATH")
-    console.log(parentPath)
+    console.log(pth)
 
-    console.log("GRID ITEMS")
-    console.log(lists)
+    let {lists, parent} = pth
 
     return (
         <div>
@@ -90,7 +83,7 @@ function Folder(props) {
                 </Grid>
             </Grid>
 
-            <ListGrid items={lists} sortMethod={sortMethod} top={18} />
+            <ListGrid path={pathStr} parent={parentPath} items={lists} sortMethod={sortMethod} top={18} />
 
         </div>
     );
