@@ -11,7 +11,6 @@ import { Grid } from '@material-ui/core';
 let count = 0
 
 function getPath(path, lists, parent) {
-    console.log(path, lists, parent)
 
     if (path.length === 0) {
         if (lists) {
@@ -28,7 +27,7 @@ function getPath(path, lists, parent) {
             continue
         }
         let pth = item["PATH"].split("-")
-        if (item["NAME"] === path[0]) {
+        if (pth[pth.length-1] === path[0]) {
 
             path.shift()
             pth.pop()
@@ -76,7 +75,7 @@ function Folder(props) {
 
             <Grid container style={{ top: "10%", position: "absolute" }}>
                 <Grid item xs={3}>
-                    <CreateListFab path={pathStr} />
+                  <CreateListFab path={pathStr} gridItems={props.gridItems} />
                 </Grid>
                 <Grid item xs={6}></Grid>
                 <Grid item xs={3} style={{ display: 'flex', flexDirection: 'row' }} >

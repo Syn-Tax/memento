@@ -1,4 +1,4 @@
-# v1.3.0-dev
+# v1.3.0
 
 Added Features:
 
@@ -8,13 +8,13 @@ Fixed:
 
 - nested folders
 
-# v1.2.0-dev
+# v1.2.0
 
 Added Features:
 
 - Use images in questions
 
-# v1.1.1-dev
+# v1.1.1
 
 Changed:
 
