@@ -1,3 +1,9 @@
+# v1.3.1-dev
+
+Fixed:
+
+- Back button on Testing screen
+
 # v1.3.0
 
 Added Features:
