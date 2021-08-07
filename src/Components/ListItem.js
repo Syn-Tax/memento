@@ -144,7 +144,7 @@ function ListItem(props) {
     return (
         <div ref={drop}>
           <Link to={`/${props.type.toLowerCase()}/${itemPath}`}>
-            <Box ref={drag} boxShadow={3} style={{ width: '17%', height: '100%', backgroundColor: colors[props.type], borderRadius: 4, position: "absolute" }}>
+            <Box ref={drag} boxShadow={3} style={{ width: '13vw', height: '100%', backgroundColor: colors[props.type], borderRadius: 4, position: "absolute" }}>
               <Box style={{ width: '70%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%" }} >
                 <span style={{ fontFamily: "Roboto", fontSize: "17pt", top: "-4%", position: "absolute", whiteSpace: "nowrap", left: "20%" }} >
                   {props.name}
