@@ -1,3 +1,9 @@
+# v1.3.2-dev
+
+Fixed:
+
+- Text overflow on list item
+
 # v1.3.1-dev
 
 Fixed:
