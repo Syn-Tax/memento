@@ -22,6 +22,10 @@ function CreateListFab(props) {
         setFolderDialog(true)
     }
 
+    const closeFolderDialog = () => {
+        setFolderDialog(false)
+    }
+
     const handleListItemClick = (event) => {
         setAnchorEl(null)
         console.log(`/create-list/${props.path}`)
@@ -75,7 +79,7 @@ function CreateListFab(props) {
             </MenuItem>
           </Menu>
 
-          <Dialog open={folderDialog} >
+          <Dialog open={folderDialog} onClose={closeFolderDialog} >
             <DialogTitle>Create Folder</DialogTitle>
             <DialogContent>
               <TextField onChange={handleChange} variant="outlined" label={isInvalid ? "Error" : "Enter Folder Name"} error={isInvalid} helperText={isInvalid ? errorMessage : ""} fullwidth />

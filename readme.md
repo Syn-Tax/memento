@@ -18,7 +18,7 @@ Go to the releases page - https://github.com/Syn-Tax/memento/releases - and down
 
 # Changelog
 
-## v1.3.0
+## v1.3.3-dev
 
 Features:
 

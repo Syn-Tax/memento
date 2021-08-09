@@ -7,13 +7,14 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 function ListGrid(props) {
     const verticalSpacing = 5
     const height = 16
+    const itemsPerRow = 4
 
     props.items.sort((a, b) => ((a[props.sortMethod] < b[props.sortMethod]) ? -1 : (a[props.sortMethod] > b[props.sortMethod]) ? 1 : 0))
 
     let items = []
 
-    for (let i=0; i<props.items.length; i += 3) {
-        items.push(props.items.slice(i, i+3))
+    for (let i=0; i<props.items.length; i += itemsPerRow) {
+        items.push(props.items.slice(i, i+itemsPerRow))
     }
 
     // console.log(props.sortMethod)
@@ -32,7 +33,7 @@ function ListGrid(props) {
                 <Grid container spacing={3} style={{ top: `${props.top + (i * (height + verticalSpacing))}%`, position: "absolute", height: `${height}%` }}>
                   <Grid item xs={2}></Grid>
                   {item.map((list, j) => (
-                      <Grid item xs={3}><ListItem pth={props.path} parent_path={props.parent} handleMove={handleMove} gridItems={props.items} type={list["TYPE"]} name={list["NAME"]} path={list["PATH"]} /></Grid>
+                      <Grid item xs={2}><ListItem pth={props.path} parent_path={props.parent} handleMove={handleMove} gridItems={props.items} type={list["TYPE"]} name={list["NAME"]} path={list["PATH"]} /></Grid>
                   ))}
                 </Grid>
             ))}

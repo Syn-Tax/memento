@@ -98,11 +98,10 @@ function Test(props) {
 
     return (
         <div>
-          <Link to={parent_path}><BackButton /></Link>
           <div>
-            <div style={{ opacity: 0.7, paddingTop: "20%", fontSize: "20pt" }}>Write the answer below</div>
-            <div style={{ paddingTop: "1%", fontSize: "50pt" }}>{question["TITLE"]}</div>
-            {question["IMAGE_ID"] && <div style={{ paddingTop: "5%" }}><img src={`imgid://${question["IMAGE_ID"]}`} style={{ height: "25vh" }} /></div>}
+            <div style={{ opacity: 0.7, paddingTop: "25vh", fontSize: "20pt" }}>Write the answer below</div>
+            <div style={{ paddingTop: "1vh", fontSize: "50pt" }}>{question["TITLE"]}</div>
+            {question["IMAGE_ID"] && <div style={{ paddingTop: "5vh" }}><img src={`imgid://${question["IMAGE_ID"]}`} style={{ height: "25vh" }} /></div>}
             {question["TYPE"] === "multi"
              ? <MultiAnswer question={question} correctAnswer={correctAnswer} />
              : <SubmitAnswer question={question} correctAnswer={correctAnswer} />
