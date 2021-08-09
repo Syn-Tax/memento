@@ -4,7 +4,7 @@ Fixed:
 
 - Release CI pipeline
 
-# v1.3.3-dev
+# v1.3.3
 
 Fixed:
 
