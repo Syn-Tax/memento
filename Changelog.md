@@ -1,3 +1,9 @@
+# v1.3.3-dev
+
+Fixed:
+
+- Folder creation dialog wasn't working for some reason
+
 # v1.3.2-dev
 
 Fixed:
