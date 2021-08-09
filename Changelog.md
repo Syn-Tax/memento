@@ -1,3 +1,9 @@
+# v1.3.9-dev
+
+Fixed:
+
+- Release CI pipeline
+
 # v1.3.3
 
 Fixed:
