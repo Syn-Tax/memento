@@ -28,12 +28,12 @@ function Test(props) {
     const [continueDialog, setContinueDialog] = React.useState(false)
     const [endDialog, setEndDialog] = React.useState(false)
     const [correct, setCorrect] = React.useState(true)
+    const [correctCount, setCorrectCount] = React.useState(0)
+    const [totalCount, setTotalCount] = React.useState(0)
 
     const history = useHistory()
 
     const queryStr = queryString.parse(search)
-
-    console.log(pathStr)
 
     let parent_path
 
@@ -64,6 +64,10 @@ function Test(props) {
         history.push(`/list/${pathStr}`)
     }
 
+    const finishButtonClick = () => {
+        history.push(`/end/${pathStr}?total=${totalCount}&correct=${correctCount}`)
+    }
+
     const continueFunc = () => {
         setTime(1)
         handleDialogClose()
@@ -87,12 +91,21 @@ function Test(props) {
     }
 
     const newQuestion = () => {
-        setQuestion(questions[Math.floor(Math.random()*questions.length)])
+        let random = Math.random()
+        let index = Math.floor(random*questions.length)
+        setQuestion(questions[index])
         setNumQuestions(numQuestions+1)
     }
 
     const correctAnswer = (value) => {
         setCorrect(value)
+
+        if (value) {
+            setCorrectCount(correctCount+1)
+        }
+
+        setTotalCount(totalCount+1)
+
         setContinueDialog(true)
     }
 
@@ -119,7 +132,7 @@ function Test(props) {
           <Dialog open={endDialog} onClose={backButtonClick} >
             <DialogTitle>{"Well Done! You have made it to the end. Do you wish to continue?"}</DialogTitle>
             <DialogActions>
-              <Button onClick={backButtonClick} autoFocus>Continue</Button>
+              <Button onClick={finishButtonClick} autoFocus>Continue</Button>
             </DialogActions>
           </Dialog>
 
