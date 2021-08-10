@@ -12,9 +12,9 @@ function dumpStr(questions) {
         let line
 
         if (questions[i]["TYPE"] === "text") {
-            line = `${questions[i]["TYPE"]}\t${questions[i]["TITLE"]}\t${answers.join(";")}\t${questions[i]["IMAGE_ID"] ? questions[i]["IMAGE_ID"] : "undefined"}\t${questions[i]["IMAGE_NAME"] ? questions[i]["IMAGE_NAME"] : "undefined"}\n`
+            line = `${questions[i]["TYPE"]}\t${questions[i]["TITLE"]}\t${answers.join(";")}\t${questions[i]["IMAGE_ID"] ? questions[i]["IMAGE_ID"] : "undefined"}\t${questions[i]["IMAGE_NAME"] ? questions[i]["IMAGE_NAME"] : "undefined"}\t${questions[i]["INCORRECT"] ? questions[i]["INCORRECT"] : "0"}\n`
         } else if (questions[i]["TYPE"] === "multi") {
-            line = `${questions[i]["TYPE"]}\t${questions[i]["TITLE"]}\t${answers.join(";")}\t${questions[i]["CORRECT"]}\t${questions[i]["IMAGE_ID"] ? questions[i]["IMAGE_ID"] : "undefined"}\t${questions[i]["IMAGE_NAME"] ? questions[i]["IMAGE_NAME"] : "undefined"}\n`
+            line = `${questions[i]["TYPE"]}\t${questions[i]["TITLE"]}\t${answers.join(";")}\t${questions[i]["CORRECT"]}\t${questions[i]["IMAGE_ID"] ? questions[i]["IMAGE_ID"] : "undefined"}\t${questions[i]["IMAGE_NAME"] ? questions[i]["IMAGE_NAME"] : "undefined"}\t${questions[i]["INCORRECT"] ? questions[i]["INCORRECT"] : "0"}\n`
         }
 
         console.log("answers", answers)
@@ -37,14 +37,18 @@ function loadStr(string) {
                             "TYPE": params[0],
                             "ANSWERS": params[2].split(";"),
                             "IMAGE_ID": params[3]==="undefined" ? null : params[3],
-                            "IMAGE_NAME": params[4]==="undefined" ? null : params[4]})
+                            "IMAGE_NAME": params[4]==="undefined" ? null : params[4],
+                            "INCORRECT": parseInt(params[5])
+                           })
         } else if (params[0] === "multi") {
             questions.push({"TITLE": params[1],
                             "TYPE": params[0],
                             "ANSWERS": params[2].split(";"),
                             "CORRECT": parseInt(params[3]),
                             "IMAGE_ID": params[4]==="undefined" ? null : params[4],
-                            "IMAGE_NAME": params[5]==="undefined" ? null : params[5]})
+                            "IMAGE_NAME": params[5]==="undefined" ? null : params[5],
+                            "INCORRECT": parseInt(params[6])
+                           })
         }
     }
 

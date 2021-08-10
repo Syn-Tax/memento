@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useParams, Link, useHistory } from 'react-router-dom';
 import queryString from 'query-string';
-import { loadList } from '../Utils/List';
+import { loadList, saveList } from '../Utils/List';
 import BackButton from '../Components/BackButton';
 import SubmitAnswer from '../Components/SubmitAnswer';
 import MultiAnswer from '../Components/MultiAnswer';
@@ -17,11 +17,12 @@ const timeLimits = {"slow": 15,
                     "fast": 5,
                     "eat_my_dust": 3}
 
+
 function Test(props) {
     const { search } = useLocation()
     const { pathStr } = useParams()
-    const questions = loadList(pathStr)
-    const [question, setQuestion] = React.useState(questions[Math.floor(Math.random()*questions.length)])
+    let questions = loadList(pathStr)
+    const [questionIndex, setQuestionIndex] = React.useState(Math.floor(Math.random()*questions.length))
     const [time, setTime] = React.useState(1)
     const [timeDialog, setTimeDialog] = React.useState(false)
     const [continueDialog, setContinueDialog] = React.useState(false)
@@ -92,7 +93,7 @@ function Test(props) {
     const newQuestion = () => {
         let random = Math.random()
         let index = Math.floor(random*questions.length)
-        setQuestion(questions[index])
+        setQuestionIndex(index)
     }
 
     const correctAnswer = (value) => {
@@ -100,24 +101,45 @@ function Test(props) {
 
         if (value) {
             setCorrectCount(correctCount+1)
+            if (questions[questionIndex]["INCORRECT"] != 0) {
+                console.log(questions[questionIndex]["INCORRECT"], value)
+                questions[questionIndex]["INCORRECT"] -= 1
+                console.log(questions[questionIndex]["INCORRECT"], value)
+            }
+        } else {
+            if (!questions[questionIndex]["INCORRECT"]) {
+                console.log(questions[questionIndex]["INCORRECT"], value)
+                questions[questionIndex]["INCORRECT"] = 1
+                console.log(questions[questionIndex]["INCORRECT"], value)
+            } else {
+                console.log(questions[questionIndex]["INCORRECT"], value)
+                questions[questionIndex]["INCORRECT"] += 1
+                console.log(questions[questionIndex]["INCORRECT"], value)
+            }
         }
+
+        let split = pathStr.split("-")
+        let name = split.pop().split(".")[0]
+
+        saveList(questions, name, split.join("-"))
+
+        console.log(questions)
+
 
         setTotalCount(totalCount+1)
 
         setContinueDialog(true)
-
-        console.log(totalCount)
     }
 
     return (
         <div>
           <div>
             <div style={{ opacity: 0.7, paddingTop: "25vh", fontSize: "20pt" }}>Write the answer below</div>
-            <div style={{ paddingTop: "1vh", fontSize: "50pt" }}>{question["TITLE"]}</div>
-            {question["IMAGE_ID"] && <div style={{ paddingTop: "5vh" }}><img src={`imgid://${question["IMAGE_ID"]}`} style={{ height: "25vh" }} /></div>}
-            {question["TYPE"] === "multi"
-             ? <MultiAnswer question={question} correctAnswer={correctAnswer} />
-             : <SubmitAnswer question={question} correctAnswer={correctAnswer} />
+            <div style={{ paddingTop: "1vh", fontSize: "50pt" }}>{questions[questionIndex]["TITLE"]}</div>
+            {questions[questionIndex]["IMAGE_ID"] && <div style={{ paddingTop: "5vh" }}><img src={`imgid://${questions[questionIndex]["IMAGE_ID"]}`} style={{ height: "25vh" }} /></div>}
+            {questions[questionIndex]["TYPE"] === "multi"
+             ? <MultiAnswer question={questions[questionIndex]} correctAnswer={correctAnswer} />
+             : <SubmitAnswer question={questions[questionIndex]} correctAnswer={correctAnswer} />
             }
           </div>
 
