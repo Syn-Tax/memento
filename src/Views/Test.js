@@ -22,18 +22,17 @@ function Test(props) {
     const { pathStr } = useParams()
     const questions = loadList(pathStr)
     const [question, setQuestion] = React.useState(questions[Math.floor(Math.random()*questions.length)])
-    const [numQuestions, setNumQuestions] = React.useState(0)
     const [time, setTime] = React.useState(1)
     const [timeDialog, setTimeDialog] = React.useState(false)
     const [continueDialog, setContinueDialog] = React.useState(false)
     const [endDialog, setEndDialog] = React.useState(false)
     const [correct, setCorrect] = React.useState(true)
+    const [correctCount, setCorrectCount] = React.useState(0)
+    const [totalCount, setTotalCount] = React.useState(0)
 
     const history = useHistory()
 
     const queryStr = queryString.parse(search)
-
-    console.log(pathStr)
 
     let parent_path
 
@@ -64,6 +63,10 @@ function Test(props) {
         history.push(`/list/${pathStr}`)
     }
 
+    const finishButtonClick = () => {
+        history.push(`/end/${pathStr}?total=${totalCount}&correct=${correctCount}`)
+    }
+
     const continueFunc = () => {
         setTime(1)
         handleDialogClose()
@@ -77,7 +80,7 @@ function Test(props) {
         if (queryStr["question"] === "none") {
             return false
         } else {
-            return queryStr["question"] < numQuestions
+            return queryStr["question"] <= totalCount
         }
     }
 
@@ -87,13 +90,23 @@ function Test(props) {
     }
 
     const newQuestion = () => {
-        setQuestion(questions[Math.floor(Math.random()*questions.length)])
-        setNumQuestions(numQuestions+1)
+        let random = Math.random()
+        let index = Math.floor(random*questions.length)
+        setQuestion(questions[index])
     }
 
     const correctAnswer = (value) => {
         setCorrect(value)
+
+        if (value) {
+            setCorrectCount(correctCount+1)
+        }
+
+        setTotalCount(totalCount+1)
+
         setContinueDialog(true)
+
+        console.log(totalCount)
     }
 
     return (
@@ -119,7 +132,7 @@ function Test(props) {
           <Dialog open={endDialog} onClose={backButtonClick} >
             <DialogTitle>{"Well Done! You have made it to the end. Do you wish to continue?"}</DialogTitle>
             <DialogActions>
-              <Button onClick={backButtonClick} autoFocus>Continue</Button>
+              <Button onClick={finishButtonClick} autoFocus>Continue</Button>
             </DialogActions>
           </Dialog>
 
