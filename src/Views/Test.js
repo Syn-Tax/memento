@@ -22,7 +22,6 @@ function Test(props) {
     const { pathStr } = useParams()
     const questions = loadList(pathStr)
     const [question, setQuestion] = React.useState(questions[Math.floor(Math.random()*questions.length)])
-    const [numQuestions, setNumQuestions] = React.useState(0)
     const [time, setTime] = React.useState(1)
     const [timeDialog, setTimeDialog] = React.useState(false)
     const [continueDialog, setContinueDialog] = React.useState(false)
@@ -81,7 +80,7 @@ function Test(props) {
         if (queryStr["question"] === "none") {
             return false
         } else {
-            return queryStr["question"] < numQuestions
+            return queryStr["question"] <= totalCount
         }
     }
 
@@ -94,7 +93,6 @@ function Test(props) {
         let random = Math.random()
         let index = Math.floor(random*questions.length)
         setQuestion(questions[index])
-        setNumQuestions(numQuestions+1)
     }
 
     const correctAnswer = (value) => {
@@ -107,6 +105,8 @@ function Test(props) {
         setTotalCount(totalCount+1)
 
         setContinueDialog(true)
+
+        console.log(totalCount)
     }
 
     return (
