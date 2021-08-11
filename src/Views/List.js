@@ -1,9 +1,10 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import { Box, Grid, makeStyles, Fab } from '@material-ui/core';
 import { loadList } from '../Utils/List';
 import BackButton from '../Components/BackButton';
 import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab"
+import queryString from 'query-string'
 
 const styles = makeStyles({
     root: {
@@ -22,14 +23,23 @@ const styles = makeStyles({
 
 function List(props) {
     const { pathStr } = useParams()
+    const { search } = useLocation()
     const [speed, setSpeed] = React.useState("none")
     const [question, setQuestion] = React.useState("none")
     const [type, setType] = React.useState("normal")
 
     const classes = styles()
 
-    const questions = loadList(pathStr)
+    const queryStr = queryString.parse(search)
 
+    let questions = loadList(pathStr)
+
+    if (queryStr["practice"] === "true") {
+        questions = questions.filter(question => {
+            console.log(question)
+            return question["INCORRECT"] > 0
+        })
+    }
     let parent_path
 
     if (pathStr.split("-").length > 1) {
@@ -122,7 +132,7 @@ function List(props) {
                           */ }
 
                         <div style={{ paddingTop: "5%" }}>
-                        <Link to={`/test/${pathStr}?speed=${speed}&question=${question}&type=${type}`}><Fab variant="extended" style={{backgroundColor: "white"}}>START</Fab></Link>
+                        <Link to={`/test/${pathStr}?speed=${speed}&question=${question}&type=${type}&practice=${queryStr["practice"]}`}><Fab variant="extended" style={{backgroundColor: "white"}}>START</Fab></Link>
                         </div>
                     </Box>
                 </Grid>

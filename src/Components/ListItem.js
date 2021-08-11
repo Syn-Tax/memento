@@ -121,6 +121,10 @@ function ListItem(props) {
         })
     }
 
+    const practiceMenuItem = () => {
+        history.push(`/${props.type.toLowerCase()}/${itemPath}?practice=true`)
+    }
+
     const [{isDragging}, drag] = useDrag({
         item: {
             type: props.type,
@@ -143,7 +147,7 @@ function ListItem(props) {
 
     return (
         <div ref={drop}>
-          <Link to={`/${props.type.toLowerCase()}/${itemPath}`}>
+          <Link to={`/${props.type.toLowerCase()}/${itemPath}?practice=false`}>
             <Tooltip title={props.name} TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow>
               <Box ref={drag} boxShadow={3} style={{ width: '13vw', height: '100%', backgroundColor: colors[props.type], borderRadius: 4, position: "absolute" }}>
                 <Box style={{ width: '70%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%" }} >
@@ -166,6 +170,11 @@ function ListItem(props) {
             {props.type==="List" &&
             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={editMenuItem}>
               EDIT
+            </MenuItem>
+            }
+            {props.type==="List" &&
+            <MenuItem style={{ width: 100, fontSize: 14 }} onClick={practiceMenuItem}>
+              PRACTICE
             </MenuItem>
             }
             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={moveMenuItem}>
