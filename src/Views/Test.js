@@ -21,7 +21,18 @@ const timeLimits = {"slow": 15,
 function Test(props) {
     const { search } = useLocation()
     const { pathStr } = useParams()
+
+    const queryStr = queryString.parse(search)
+
     let questions = loadList(pathStr)
+
+    if (queryStr["practice"] === "true") {
+        questions = questions.filter(question => {
+            console.log(question)
+            return question["INCORRECT"] > 0
+        })
+    }
+
     const [questionIndex, setQuestionIndex] = React.useState(Math.floor(Math.random()*questions.length))
     const [time, setTime] = React.useState(1)
     const [timeDialog, setTimeDialog] = React.useState(false)
@@ -33,8 +44,6 @@ function Test(props) {
 
     const history = useHistory()
 
-    const queryStr = queryString.parse(search)
-
     let parent_path
 
     if (pathStr.split("-").length > 1) {
@@ -42,6 +51,9 @@ function Test(props) {
     } else {
         parent_path = "/"
     }
+
+
+    console.log(questions)
 
     React.useEffect(() => {
         const interval = setTimeout(() => incrementTime(), 1000);
@@ -102,19 +114,13 @@ function Test(props) {
         if (value) {
             setCorrectCount(correctCount+1)
             if (questions[questionIndex]["INCORRECT"] != 0) {
-                console.log(questions[questionIndex]["INCORRECT"], value)
                 questions[questionIndex]["INCORRECT"] -= 1
-                console.log(questions[questionIndex]["INCORRECT"], value)
             }
         } else {
             if (!questions[questionIndex]["INCORRECT"]) {
-                console.log(questions[questionIndex]["INCORRECT"], value)
                 questions[questionIndex]["INCORRECT"] = 1
-                console.log(questions[questionIndex]["INCORRECT"], value)
             } else {
-                console.log(questions[questionIndex]["INCORRECT"], value)
                 questions[questionIndex]["INCORRECT"] += 1
-                console.log(questions[questionIndex]["INCORRECT"], value)
             }
         }
 
