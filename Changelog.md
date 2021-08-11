@@ -1,3 +1,9 @@
+# v1.5.0-dev
+
+Added Features:
+
+- Practice lists of questions you don't know
+
 # v1.4.0-dev
 
 Added Features:
