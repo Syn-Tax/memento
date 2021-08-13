@@ -1,4 +1,4 @@
-# v1.5.0-dev
+# v1.5.0
 
 Added Features:
 
