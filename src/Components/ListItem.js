@@ -6,6 +6,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import OpenInBrowserIcon from '@material-ui/icons/OpenInBrowser';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { share } from '../Utils/Share'
 
 const electron = window.require('electron')
 const fs = electron.remote.require('fs')
@@ -125,6 +126,16 @@ function ListItem(props) {
         history.push(`/${props.type.toLowerCase()}/${itemPath}?practice=true`)
     }
 
+    const shareMenuItem = () => {
+        let value = window.electron.dialog.showSaveDialogSync({filters: [{name: "Compressed Zip", extensions: ["zip"]}]})
+
+        if (!value) {
+            return
+        } else {
+            share(itemPath, value, props.type)
+        }
+    }
+
     const [{isDragging}, drag] = useDrag({
         item: {
             type: props.type,
@@ -182,6 +193,9 @@ function ListItem(props) {
             </MenuItem>
             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={deleteMenuItem}>
               DELETE
+            </MenuItem>
+            <MenuItem style={{ width: 100, fontSize: 14 }} onClick={shareMenuItem}>
+              SHARE
             </MenuItem>
           </Menu>
         </div>
