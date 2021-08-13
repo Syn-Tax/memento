@@ -1,3 +1,20 @@
+# v1.5.0-dev
+
+Added Features:
+
+- Practice lists of questions you don't know
+
+# v1.4.0-dev
+
+Added Features:
+
+- Scoring system to make use more competitive
+- Tooltips on list item to display full names
+
+Fixed:
+
+- Devtools only open when running in development mode
+
 # v1.3.9
 
 Fixed:

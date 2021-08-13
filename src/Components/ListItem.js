@@ -1,4 +1,4 @@
-import { Box, Menu, MenuItem, IconButton } from '@material-ui/core';
+import { Box, Menu, MenuItem, IconButton, Tooltip, Fade } from '@material-ui/core';
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDrag, useDrop } from 'react-dnd'
@@ -121,6 +121,10 @@ function ListItem(props) {
         })
     }
 
+    const practiceMenuItem = () => {
+        history.push(`/${props.type.toLowerCase()}/${itemPath}?practice=true`)
+    }
+
     const [{isDragging}, drag] = useDrag({
         item: {
             type: props.type,
@@ -143,18 +147,20 @@ function ListItem(props) {
 
     return (
         <div ref={drop}>
-          <Link to={`/${props.type.toLowerCase()}/${itemPath}`}>
-            <Box ref={drag} boxShadow={3} style={{ width: '13vw', height: '100%', backgroundColor: colors[props.type], borderRadius: 4, position: "absolute" }}>
-              <Box style={{ width: '70%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%" }} >
-                <span  style={{ fontFamily: "Roboto", fontSize: "17pt", top: "-4%", position: "absolute", whiteSpace: "nowrap", overflow: "hidden", left: "1vw", width: "8vw", textOverflow: "ellipsis" }} >
-                  {props.name}
-                </span>
+          <Link to={`/${props.type.toLowerCase()}/${itemPath}?practice=false`}>
+            <Tooltip title={props.name} TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow>
+              <Box ref={drag} boxShadow={3} style={{ width: '13vw', height: '100%', backgroundColor: colors[props.type], borderRadius: 4, position: "absolute" }}>
+                <Box style={{ width: '70%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%" }} >
+                  <span  style={{ fontFamily: "Roboto", fontSize: "17pt", top: "-4%", color: "black", position: "absolute", whiteSpace: "nowrap", overflow: "hidden", left: "1vw", width: "8vw", textOverflow: "ellipsis" }} >
+                    {props.name}
+                  </span>
+                </Box>
+                <Box style={{ width: '3.18vh', height: '3.18vh', backgroundColor: "white", position: "absolute", top: "10%", left: "70%", borderBottomRightRadius: "50%", borderTopRightRadius: "50%" }} ></Box>
+                <IconButton onClick={openMenu} style={{ position: "absolute", right: "-5%", top: "5%" }}>
+                  <MoreVertIcon />
+                </IconButton>
               </Box>
-              <Box style={{ width: '3.18vh', height: '3.18vh', backgroundColor: "white", position: "absolute", top: "10%", left: "70%", borderBottomRightRadius: "50%", borderTopRightRadius: "50%" }} ></Box>
-              <IconButton onClick={openMenu} style={{ position: "absolute", right: "-5%", top: "5%" }}>
-                <MoreVertIcon />
-              </IconButton>
-            </Box>
+            </Tooltip>
           </Link>
 
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={closeMenu}>
@@ -164,6 +170,11 @@ function ListItem(props) {
             {props.type==="List" &&
             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={editMenuItem}>
               EDIT
+            </MenuItem>
+            }
+            {props.type==="List" &&
+            <MenuItem style={{ width: 100, fontSize: 14 }} onClick={practiceMenuItem}>
+              PRACTICE
             </MenuItem>
             }
             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={moveMenuItem}>

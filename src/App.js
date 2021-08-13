@@ -5,6 +5,7 @@ import CreateFolder from './Views/CreateFolder';
 import CreateList from './Views/CreateList';
 import List from './Views/List';
 import Test from './Views/Test';
+import End from './Views/End'
 import './Css/App.css';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { getFiles } from './Utils/GetFiles';
@@ -71,6 +72,9 @@ function App() {
                     </Route>
                     <Route path="/create-list/:pathStr">
                         <CreateList gridItems={gridItems} />
+                    </Route>
+                    <Route path="/end/:pathStr">
+                        <End />
                     </Route>
                 </Switch>
             </Router>
