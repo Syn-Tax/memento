@@ -1,3 +1,9 @@
+# v1.6.2-dev
+
+Fixed:
+
+- Practice questions bugging when no more questions to practice
+
 # v1.6.1-dev
 
 Fixed:

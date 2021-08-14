@@ -39,6 +39,10 @@ function Test(props) {
             return question["INCORRECT"] > 0
         })
         if (questions.length < 1) {
+            let split = pathStr.split("-")
+            let name = split.pop().split(".")[0]
+
+            saveList(questions, name, split.join("-"))
             history.push(`/end/${pathStr}?total=${totalCount}&correct=${correctCount}`)
         }
     }
@@ -52,6 +56,10 @@ function Test(props) {
     const [correct, setCorrect] = React.useState(true)
 
     if (questionIndex >= questions.length) {
+        let split = pathStr.split("-")
+        let name = split.pop().split(".")[0]
+
+        saveList(questions, name, split.join("-"))
         history.push(`/end/${pathStr}?total=${totalCount}&correct=${correctCount}`)
     }
 
