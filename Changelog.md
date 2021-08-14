@@ -1,3 +1,17 @@
+# v1.6.0-dev
+
+Added Features:
+
+- Sharing lists
+
+Fixed:
+
+- Allow for devtools to be opened
+- Optimized submit methods
+- Optimized deletion of lists
+- Fixed "open" menu item
+- Removed hamburger menu, fixing several bugs
+
 # v1.5.0
 
 Added Features:
