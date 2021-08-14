@@ -12,17 +12,20 @@ const path = electron.remote.require('path')
 
 const imgFolder = path.join(electron.remote.app.getPath('userData'), "./Data/.images")
 
-const timeLimits = {"slow": 15,
-                    "medium": 10,
-                    "fast": 5,
-                    "eat_my_dust": 3}
+const timeLimits = {"slow": 20,
+                    "medium": 15,
+                    "fast": 10,
+                    "eat_my_dust": 5}
 
 let questions
 
 function Test(props) {
     const { search } = useLocation()
     const { pathStr } = useParams()
+    const history = useHistory()
     const [loadedQuestions, setLoadedQuestions] = React.useState(false)
+    const [correctCount, setCorrectCount] = React.useState(0)
+    const [totalCount, setTotalCount] = React.useState(0)
 
     const queryStr = queryString.parse(search)
 
@@ -35,7 +38,11 @@ function Test(props) {
         questions = questions.filter(question => {
             return question["INCORRECT"] > 0
         })
+        if (questions.length < 1) {
+            history.push(`/end/${pathStr}?total=${totalCount}&correct=${correctCount}`)
+        }
     }
+
 
     const [questionIndex, setQuestionIndex] = React.useState(Math.floor(Math.random()*questions.length))
     const [time, setTime] = React.useState(1)
@@ -43,10 +50,10 @@ function Test(props) {
     const [continueDialog, setContinueDialog] = React.useState(false)
     const [endDialog, setEndDialog] = React.useState(false)
     const [correct, setCorrect] = React.useState(true)
-    const [correctCount, setCorrectCount] = React.useState(0)
-    const [totalCount, setTotalCount] = React.useState(0)
 
-    const history = useHistory()
+    if (questionIndex >= questions.length) {
+        history.push(`/end/${pathStr}?total=${totalCount}&correct=${correctCount}`)
+    }
 
     let parent_path
 
@@ -57,7 +64,7 @@ function Test(props) {
     }
 
     React.useEffect(() => {
-        const interval = setTimeout(() => incrementTime(), 1000);
+        const interval = setTimeout(() => incrementTime(), 5000);
         return () => {
             clearTimeout(interval);
         };
@@ -65,7 +72,7 @@ function Test(props) {
 
     const incrementTime = () => {
         if (queryStr["speed"] !== 1) {
-            setTime(time + 1)
+            setTime(time + 5)
 
             if (time > timeLimits[queryStr["speed"]]) {
                 setTimeDialog(true)
@@ -141,15 +148,17 @@ function Test(props) {
 
     return (
         <div>
-          <div>
-            <div style={{ opacity: 0.7, paddingTop: "25vh", fontSize: "20pt" }}>Write the answer below</div>
-            <div style={{ paddingTop: "1vh", fontSize: "50pt" }}>{questions[questionIndex]["TITLE"]}</div>
-            {questions[questionIndex]["IMAGE_ID"] && <div style={{ paddingTop: "5vh" }}><img src={`imgid://${questions[questionIndex]["IMAGE_ID"]}`} style={{ height: "25vh" }} /></div>}
-            {questions[questionIndex]["TYPE"] === "multi"
-             ? <MultiAnswer question={questions[questionIndex]} correctAnswer={correctAnswer} />
-             : <SubmitAnswer question={questions[questionIndex]} correctAnswer={correctAnswer} />
-            }
-          </div>
+          {questions[questionIndex] &&
+           <div>
+             <div style={{ opacity: 0.7, paddingTop: "25vh", fontSize: "20pt" }}>Write the answer below</div>
+             <div style={{ paddingTop: "1vh", fontSize: "50pt" }}>{questions[questionIndex]["TITLE"]}</div>
+             {questions[questionIndex]["IMAGE_ID"] && <div style={{ paddingTop: "5vh" }}><img src={`imgid://${questions[questionIndex]["IMAGE_ID"]}`} style={{ height: "25vh" }} /></div>}
+             {questions[questionIndex]["TYPE"] === "multi"
+              ? <MultiAnswer question={questions[questionIndex]} correctAnswer={correctAnswer} />
+              : <SubmitAnswer question={questions[questionIndex]} correctAnswer={correctAnswer} />
+             }
+           </div>
+          }
 
           <Dialog open={continueDialog} onClose={handleDialogClose} >
             <DialogTitle>{`${correct ? "Well Done!" : "So Close!"} Do you wish to continue?`}</DialogTitle>
