@@ -1,3 +1,9 @@
+# v1.6.1-dev
+
+Fixed:
+
+- Moving lists into nested folders
+
 # v1.6.0-dev
 
 Added Features:
