@@ -14,7 +14,7 @@ function Home(props) {
     <div>
       <div style={{ position: "static" }}>
         <Welcome />
-        <NavbarToggle lists={props.gridItems} />
+        {/*<NavbarToggle lists={props.gridItems} />*/}
       </div>
 
       <Grid container style={{ top: "27%", position: "absolute", height: "73%" }}>

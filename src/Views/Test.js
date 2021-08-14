@@ -17,14 +17,19 @@ const timeLimits = {"slow": 15,
                     "fast": 5,
                     "eat_my_dust": 3}
 
+let questions
 
 function Test(props) {
     const { search } = useLocation()
     const { pathStr } = useParams()
+    const [loadedQuestions, setLoadedQuestions] = React.useState(false)
 
     const queryStr = queryString.parse(search)
 
-    let questions = loadList(pathStr)
+    if (!loadedQuestions) {
+        questions = loadList(pathStr)
+        setLoadedQuestions(true)
+    }
 
     if (queryStr["practice"] === "true") {
         questions = questions.filter(question => {
@@ -52,9 +57,6 @@ function Test(props) {
         parent_path = "/"
     }
 
-
-    console.log(questions)
-
     React.useEffect(() => {
         const interval = setTimeout(() => incrementTime(), 1000);
         return () => {
@@ -73,10 +75,18 @@ function Test(props) {
     }
 
     const backButtonClick = () => {
-        history.push(`/list/${pathStr}`)
+        let split = pathStr.split("-")
+        let name = split.pop().split(".")[0]
+
+        saveList(questions, name, split.join("-"))
+        history.push(`/end/${pathStr}?total=${totalCount}&correct=${correctCount}`)
     }
 
     const finishButtonClick = () => {
+        let split = pathStr.split("-")
+        let name = split.pop().split(".")[0]
+
+        saveList(questions, name, split.join("-"))
         history.push(`/end/${pathStr}?total=${totalCount}&correct=${correctCount}`)
     }
 
@@ -124,13 +134,6 @@ function Test(props) {
             }
         }
 
-        let split = pathStr.split("-")
-        let name = split.pop().split(".")[0]
-
-        saveList(questions, name, split.join("-"))
-
-        console.log(questions)
-
 
         setTotalCount(totalCount+1)
 
@@ -152,7 +155,7 @@ function Test(props) {
           <Dialog open={continueDialog} onClose={handleDialogClose} >
             <DialogTitle>{`${correct ? "Well Done!" : "So Close!"} Do you wish to continue?`}</DialogTitle>
             <DialogActions>
-              <Button onClick={backButtonClick}>Back</Button>
+              <Button onClick={backButtonClick}>Finish</Button>
               <Button onClick={continueFunc} autoFocus>Continue</Button>
             </DialogActions>
           </Dialog>
@@ -167,7 +170,7 @@ function Test(props) {
           <Dialog open={timeDialog} onClose={handleDialogClose} >
             <DialogTitle>{"You are out of time for this question. Do you wish to continue?"}</DialogTitle>
             <DialogActions>
-              <Button onClick={backButtonClick}>Back</Button>
+              <Button onClick={backButtonClick}>Finish</Button>
               <Button onClick={continueFunc} autoFocus>Continue</Button>
             </DialogActions>
           </Dialog>

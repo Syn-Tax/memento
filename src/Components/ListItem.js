@@ -62,7 +62,7 @@ function ListItem(props) {
     }
 
     const openMenuItem = () => {
-        history.push(`/${props.type.toLowerCase()}/${props.path}`)
+        history.push(`/${props.type.toLowerCase()}/${itemPath}?practice=false`)
     }
 
     const editMenuItem = () => {
@@ -92,6 +92,7 @@ function ListItem(props) {
             fs.rmdirSync(pth, { recursive: true })
             console.log("deleted: ", pth)
         }
+        closeMenu()
     }
 
     const moveMenuItem = () => {
@@ -120,6 +121,7 @@ function ListItem(props) {
             if (err) throw err
             console.log(`${oldpath} moved to ${newpath}`)
         })
+        closeMenu()
     }
 
     const practiceMenuItem = () => {
@@ -134,6 +136,7 @@ function ListItem(props) {
         } else {
             share(itemPath, value, props.type)
         }
+        closeMenu()
     }
 
     const [{isDragging}, drag] = useDrag({
@@ -179,18 +182,20 @@ function ListItem(props) {
               OPEN
             </MenuItem>
             {props.type==="List" &&
-            <MenuItem style={{ width: 100, fontSize: 14 }} onClick={editMenuItem}>
-              EDIT
-            </MenuItem>
+             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={editMenuItem}>
+               EDIT
+             </MenuItem>
             }
             {props.type==="List" &&
-            <MenuItem style={{ width: 100, fontSize: 14 }} onClick={practiceMenuItem}>
-              PRACTICE
-            </MenuItem>
+             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={practiceMenuItem}>
+               PRACTICE
+             </MenuItem>
             }
-            <MenuItem style={{ width: 100, fontSize: 14 }} onClick={moveMenuItem}>
-              MOVE BACK
-            </MenuItem>
+            {props.pth &&
+             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={moveMenuItem}>
+               MOVE BACK
+             </MenuItem>
+            }
             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={deleteMenuItem}>
               DELETE
             </MenuItem>

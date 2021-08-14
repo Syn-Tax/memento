@@ -88,7 +88,6 @@ function List(props) {
                                 <Grid container style={{ paddingTop: "3%" }}>
                                     <Grid item xs={3}>{question["TITLE"]}</Grid>
                                 <Grid item xs={4}>{question["TYPE"] === "multi" ? "yes" : "no"}</Grid>
-
                                   {question["TYPE"] === "multi" ? <Grid item xs={5}>{question["ANSWERS"][question["CORRECT"]]}</Grid> : <Grid item xs={5}>{question["ANSWERS"].join(";")}</Grid>}
                                 </Grid>
                             )

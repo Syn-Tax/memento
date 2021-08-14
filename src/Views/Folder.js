@@ -65,9 +65,10 @@ function Folder(props) {
 
     return (
         <div>
+          { /*
             <div style={{ position: "static" }}>
                 <NavbarToggle lists={props.gridItems} />
-            </div>
+            </div> */ }
 
             <Link to={parentPath}>
                 <BackButton />

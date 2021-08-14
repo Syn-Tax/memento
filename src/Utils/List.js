@@ -55,7 +55,7 @@ function loadStr(string) {
     return questions
 }
 
-export function saveList(questions, name, pathStr) {
+export async function saveList(questions, name, pathStr) {
     const pathS = pathStr.split('-')
     let file = dataFolder
 

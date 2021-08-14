@@ -1,19 +1,89 @@
 import { loadList } from './List'
 
-const JSZip = require('jszip')
 const electron = window.require('electron')
 const path = electron.remote.require('path')
+const fs = electron.remote.require('fs-extra')
+const zipdir = electron.remote.require('zip-dir')
 
-export function share(path, file, type) {
-  const zip = JSZip()
+const tempFolder = path.join(electron.remote.app.getPath('temp'), "./memento")
+const dataFolder = path.join(electron.remote.app.getPath('userData'), "./Data")
 
-  if (type === "List") {
-    let questions = loadList(path)
+function getImgs(filePath, imgs) {
+  fs.readdirSync(filePath).forEach(file => {
+    if (fs.lsstatSync(dir+file).isDirectory()) {
+      getImgs(dir+file, imgs)
+    }
+
+    let questions = loadList(dir+file)
 
     questions.forEach((question) => {
       if (question["IMAGE_ID"]) {
-        zip.file()
+        imgs.push(question["IMAGE_ID"])
       }
     })
+  })
+}
+
+export function share(filePath, file, type) {
+  const imgPath = path.join(tempFolder, "./.images")
+
+  if (!fs.existsSync(imgPath)) {
+    fs.mkdirSync(imgPath, {recursive: true})
   }
+
+  if (type === "List") {
+    let questions = loadList(filePath)
+
+
+    questions.forEach((question) => {
+      if (question["IMAGE_ID"]) {
+        fs.copyFile(path.join(dataFolder, "./.images", question["IMAGE_ID"]),
+                        path.join(imgPath, question["IMAGE_ID"]),
+                        (err) => {
+                          if (err) throw err
+                        })
+      }
+    })
+
+    let pthS = filePath.split("-")
+
+    let pth = dataFolder
+
+    for (let i = 0; i < pthS.length; i++) {
+      pth = path.join(pth, pthS[i])
+    }
+
+    fs.copyFile(pth, path.join(tempFolder, pthS.pop()), (err) => {
+      if (err) throw err
+    })
+  } else {
+    let imgs = []
+    getImgs(filePath, imgs)
+
+    imgs.forEach((img) => {
+      fs.copyFile(path.join(dataFolder, "./.images", img),
+                      path.join(imgPath, img),
+                      (err) => {
+                        if (err) throw err
+                      })
+    })
+
+    let pthS = filePath.split("-")
+
+    let pth = dataFolder
+
+    for (let i = 0; i < pthS.length; i++) {
+      pth = path.join(pth, pthS[i])
+    }
+
+    fs.copy(pth, path.join(tempFolder, pthS.pop()), (err) => {
+      if (err) throw err
+    })
+  }
+
+  zipdir(tempFolder, { saveTo: file }, (err, buffer) => {
+    if (err) throw err
+  })
+
+  fs.rmdir(tempFolder, { recursive: true })
 }

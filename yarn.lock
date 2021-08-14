@@ -3359,6 +3359,11 @@ async@^2.6.2:
   dependencies:
     lodash "^4.17.14"
 
+async@^3.2.0:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.2.1.tgz#d3274ec66d107a47476a4c49136aacdb00665fc8"
+  integrity sha512-XdD5lRO/87udXCMC9meWdYiR+Nq6ZjUfXidViUZGu2F1MO4T3XwZ1et0hb2++BgLfhyJwy44BGB/yx80ABx8hg==
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -9985,7 +9990,7 @@ jstransformer@0.0.2:
     array-includes "^3.1.2"
     object.assign "^4.1.2"
 
-jszip@^3.7.1:
+jszip@^3.2.2:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.7.1.tgz#bd63401221c15625a1228c556ca8a68da6fda3d9"
   integrity sha512-ghL0tz1XG9ZEmRMcEN2vt7xabrDdqHHeykgARpmZ0BiIctWxM47Vt63ZO2dnp4QYt/xJVLLy5Zv1l/xRdh2byg==
@@ -16416,3 +16421,11 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zip-dir@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/zip-dir/-/zip-dir-2.0.0.tgz#c5df6e15c8f9efeb4e320377028c9f5c8277c932"
+  integrity sha512-uhlsJZWz26FLYXOD6WVuq+fIcZ3aBPGo/cFdiLlv3KNwpa52IF3ISV8fLhQLiqVu5No3VhlqlgthN6gehil1Dg==
+  dependencies:
+    async "^3.2.0"
+    jszip "^3.2.2"
