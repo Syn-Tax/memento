@@ -104,12 +104,6 @@ function ListItem(props) {
 
         let folderSplit = props.parent_path.split('-')
 
-        let parentPth = [...folderSplit]
-        parentPth.pop()
-        parentPth.pop()
-
-        let parent = getPath(props.parent_path, props.gridItems, parentPth)
-
         let oldpath
         let newpath
 
@@ -149,7 +143,7 @@ function ListItem(props) {
     const [{isDragging}, drag] = useDrag({
         item: {
             type: props.type,
-            id: props.path,
+            id: itemPath,
             name: props.name
         },
         type: props.type,
@@ -160,7 +154,7 @@ function ListItem(props) {
 
     const [{isOver}, drop] = useDrop({
         accept: ['List', 'Folder'],
-        drop: (item, monitor) => (props.handleMove(item, monitor, props.path, props.name)),
+        drop: (item, monitor) => (props.handleMove(item, monitor, props.path, props.name, props.pth)),
         collect: monitor => ({
             isOver: !!monitor.isOver()
         })

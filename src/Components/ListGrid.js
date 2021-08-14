@@ -22,8 +22,8 @@ function ListGrid(props) {
     items.push([])
     // console.log(items)
 
-    const handleMove = (item, monitor, pth, name) => {
-        move(item, pth, name)
+    const handleMove = (item, monitor, pth, name, path) => {
+      move(item, path+"-"+pth, name)
     }
 
     return (
