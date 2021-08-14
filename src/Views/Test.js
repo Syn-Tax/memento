@@ -33,7 +33,6 @@ function Test(props) {
 
     if (queryStr["practice"] === "true") {
         questions = questions.filter(question => {
-            console.log(question)
             return question["INCORRECT"] > 0
         })
     }

@@ -62,7 +62,7 @@ function ListItem(props) {
     }
 
     const openMenuItem = () => {
-        history.push(`/${props.type.toLowerCase()}/${itemPath}?practice=false`)
+        history.push(`/${props.type.toLowerCase()}/${itemPath}${props.type==="List" ? "?practice=false" : ""}`)
     }
 
     const editMenuItem = () => {
@@ -84,12 +84,16 @@ function ListItem(props) {
         if (props.type === "List") {
             let split = props.path.split("-")
             let pth = path.join(dataFolder, split.join("/"))
-            fs.unlinkSync(pth)
+            fs.unlink(pth, (err) => {
+                if (err) throw err
+            })
             console.log("deleted: ", pth)
         } else if (props.type === "Folder") {
             let split = props.path.split("-")
             let pth = path.join(dataFolder, split.join("/"))
-            fs.rmdirSync(pth, { recursive: true })
+            fs.rmdir(pth, { recursive: true }, (err) => {
+                if (err) throw err
+            })
             console.log("deleted: ", pth)
         }
         closeMenu()
@@ -129,7 +133,10 @@ function ListItem(props) {
     }
 
     const shareMenuItem = () => {
-        let value = window.electron.dialog.showSaveDialogSync({filters: [{name: "Compressed Zip", extensions: ["zip"]}]})
+        let value = window.electron.dialog.showSaveDialogSync({filters: [{
+                                                                    name: "Compressed Zip",
+                                                                    extensions: ["zip"]
+                                                             }]})
 
         if (!value) {
             return
@@ -161,7 +168,7 @@ function ListItem(props) {
 
     return (
         <div ref={drop}>
-          <Link to={`/${props.type.toLowerCase()}/${itemPath}?practice=false`}>
+          <Link to={`/${props.type.toLowerCase()}/${itemPath}${props.type==="List" ? "?practice=false" : ""}`}>
             <Tooltip title={props.name} TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow>
               <Box ref={drag} boxShadow={3} style={{ width: '13vw', height: '100%', backgroundColor: colors[props.type], borderRadius: 4, position: "absolute" }}>
                 <Box style={{ width: '70%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%" }} >

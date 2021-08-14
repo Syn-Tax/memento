@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Fab, Menu, MenuItem, Dialog, DialogContent, DialogTitle, DialogActions, Button, TextField } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { checkFolder, createFolder } from '../Utils/CreateFolder';
+import { importItem } from '../Utils/Share'
 
 function CreateListFab(props) {
     const [anchorEl, setAnchorEl] = React.useState(null)
@@ -30,6 +31,19 @@ function CreateListFab(props) {
         setAnchorEl(null)
         console.log(`/create-list/${props.path}`)
         history.push(`/create-list/${props.path}`)
+    }
+
+    const handleImportItemClick = (event) => {
+        let value = window.electron.dialog.showOpenDialogSync({properties: ['openFile'],
+                                                               filters: [{
+                                                                   name: "Compressed Zip",
+                                                                   extensions: ["zip"]
+                                                               }]})[0]
+
+        if (!value) {return}
+
+        importItem(value, props.path)
+        setAnchorEl(null)
     }
 
     const CloseMenu = () => {
@@ -76,6 +90,9 @@ function CreateListFab(props) {
             </MenuItem>
             <MenuItem key="LIST" style={{ width: 150, fontSize: 14 }} onClick={handleListItemClick}>
               LIST
+            </MenuItem>
+            <MenuItem key="IMPORT" style={{ width: 150, fontSize: 14 }} onClick={handleImportItemClick}>
+              IMPORT
             </MenuItem>
           </Menu>
 

@@ -4,9 +4,57 @@ const electron = window.require('electron')
 const path = electron.remote.require('path')
 const fs = electron.remote.require('fs-extra')
 const zipdir = electron.remote.require('zip-dir')
+const DecompressZip = electron.remote.require('decompress-zip')
 
 const tempFolder = path.join(electron.remote.app.getPath('temp'), "./memento")
 const dataFolder = path.join(electron.remote.app.getPath('userData'), "./Data")
+
+function copyImport(pth) {
+  fs.copy(tempFolder,
+          pth,
+          (err) => {
+            if (err) throw err
+          })
+
+  fs.readdirSync(path.join(tempFolder, "./.images")).forEach(file => {
+    fs.copy(path.join(tempFolder, "./.images")+file,
+            path.join(dataFolder, "./.images")+file,
+           (err) => {
+             if (err) throw err
+           })
+  })
+}
+
+export function importItem(zipPath, folderPathStr) {
+  if (!fs.existsSync(tempFolder)) {
+    fs.mkdirSync(tempFolder, {recursive: true})
+  }
+
+  let pthS = folderPathStr.split('-')
+  let pth = dataFolder
+
+  if (pthS.length > 1){
+    for (let i = 0; i < pthS.length; i++) {
+      pth = path.join(pth, pthS[i])
+    }
+  }
+
+  console.log(pth)
+
+  let unzipper = new DecompressZip(zipPath)
+
+  unzipper.on('error', (err) => {
+    if (err) throw err
+  })
+
+  unzipper.on('extract', (log) => {
+    copyImport(pth)
+  })
+
+  unzipper.extract({
+    path: tempFolder
+  })
+}
 
 function getImgs(filePath, imgs) {
   fs.readdirSync(filePath).forEach(file => {
