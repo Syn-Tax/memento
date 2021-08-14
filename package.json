@@ -1,6 +1,6 @@
 {
   "name": "Memento",
-  "version": "1.5.0-dev",
+  "version": "1.5.0",
   "author": {
     "name": "Oscar Morris",
     "email": "twocap06@gmail.com"
@@ -20,7 +20,10 @@
     "@testing-library/user-event": "^12.6.3",
     "babel-loader": "8.1.0",
     "concurrently": "^5.3.0",
+    "decompress-zip": "^0.3.3",
+    "electron-debug": "^3.2.0",
     "electron-is-dev": "^2.0.0",
+    "fs-extra": "^10.0.0",
     "jimp": "^0.16.1",
     "query-string": "^7.0.0",
     "react": "^17.0.1",
@@ -31,7 +34,8 @@
     "react-scripts": "^4.0.2",
     "react-spring": "^9.0.0",
     "wait-on": "^5.2.1",
-    "web-vitals": "^1.1.0"
+    "web-vitals": "^1.1.0",
+    "zip-dir": "^2.0.0"
   },
   "scripts": {
     "build": "react-scripts build",

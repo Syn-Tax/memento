@@ -6,6 +6,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import OpenInBrowserIcon from '@material-ui/icons/OpenInBrowser';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { share } from '../Utils/Share'
 
 const electron = window.require('electron')
 const fs = electron.remote.require('fs')
@@ -61,7 +62,7 @@ function ListItem(props) {
     }
 
     const openMenuItem = () => {
-        history.push(`/${props.type.toLowerCase()}/${props.path}`)
+        history.push(`/${props.type.toLowerCase()}/${itemPath}${props.type==="List" ? "?practice=false" : ""}`)
     }
 
     const editMenuItem = () => {
@@ -83,14 +84,19 @@ function ListItem(props) {
         if (props.type === "List") {
             let split = props.path.split("-")
             let pth = path.join(dataFolder, split.join("/"))
-            fs.unlinkSync(pth)
+            fs.unlink(pth, (err) => {
+                if (err) throw err
+            })
             console.log("deleted: ", pth)
         } else if (props.type === "Folder") {
             let split = props.path.split("-")
             let pth = path.join(dataFolder, split.join("/"))
-            fs.rmdirSync(pth, { recursive: true })
+            fs.rmdir(pth, { recursive: true }, (err) => {
+                if (err) throw err
+            })
             console.log("deleted: ", pth)
         }
+        closeMenu()
     }
 
     const moveMenuItem = () => {
@@ -119,10 +125,25 @@ function ListItem(props) {
             if (err) throw err
             console.log(`${oldpath} moved to ${newpath}`)
         })
+        closeMenu()
     }
 
     const practiceMenuItem = () => {
         history.push(`/${props.type.toLowerCase()}/${itemPath}?practice=true`)
+    }
+
+    const shareMenuItem = () => {
+        let value = window.electron.dialog.showSaveDialogSync({filters: [{
+                                                                    name: "Compressed Zip",
+                                                                    extensions: ["zip"]
+                                                             }]})
+
+        if (!value) {
+            return
+        } else {
+            share(itemPath, value, props.type)
+        }
+        closeMenu()
     }
 
     const [{isDragging}, drag] = useDrag({
@@ -147,7 +168,7 @@ function ListItem(props) {
 
     return (
         <div ref={drop}>
-          <Link to={`/${props.type.toLowerCase()}/${itemPath}?practice=false`}>
+          <Link to={`/${props.type.toLowerCase()}/${itemPath}${props.type==="List" ? "?practice=false" : ""}`}>
             <Tooltip title={props.name} TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} arrow>
               <Box ref={drag} boxShadow={3} style={{ width: '13vw', height: '100%', backgroundColor: colors[props.type], borderRadius: 4, position: "absolute" }}>
                 <Box style={{ width: '70%', height: '20%', backgroundColor: "white", position: "absolute", top: "10%" }} >
@@ -168,20 +189,25 @@ function ListItem(props) {
               OPEN
             </MenuItem>
             {props.type==="List" &&
-            <MenuItem style={{ width: 100, fontSize: 14 }} onClick={editMenuItem}>
-              EDIT
-            </MenuItem>
+             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={editMenuItem}>
+               EDIT
+             </MenuItem>
             }
             {props.type==="List" &&
-            <MenuItem style={{ width: 100, fontSize: 14 }} onClick={practiceMenuItem}>
-              PRACTICE
-            </MenuItem>
+             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={practiceMenuItem}>
+               PRACTICE
+             </MenuItem>
             }
-            <MenuItem style={{ width: 100, fontSize: 14 }} onClick={moveMenuItem}>
-              MOVE BACK
-            </MenuItem>
+            {props.pth &&
+             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={moveMenuItem}>
+               MOVE BACK
+             </MenuItem>
+            }
             <MenuItem style={{ width: 100, fontSize: 14 }} onClick={deleteMenuItem}>
               DELETE
+            </MenuItem>
+            <MenuItem style={{ width: 100, fontSize: 14 }} onClick={shareMenuItem}>
+              SHARE
             </MenuItem>
           </Menu>
         </div>

@@ -4,6 +4,7 @@ const path = electron.remote.require('path')
 const Jimp = electron.remote.require('jimp')
 
 const dataFolder = path.join(electron.remote.app.getPath('userData'), "./Data")
+const hexLength = 8
 
 /*
 const fs = require("fs")
@@ -18,7 +19,7 @@ function hexString(length) {
 }
 
 export function copyImg(pth) {
-  let hexstr = hexString(8)
+  let hexstr = hexString(hexLength)
 
   let existing = []
 
@@ -27,7 +28,7 @@ export function copyImg(pth) {
   })
 
   while (existing.includes(hexstr)) {
-    hexstr = hexString(8)
+    hexstr = hexString(hexLength)
   }
 
   let name = hexstr+".png"
