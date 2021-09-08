@@ -1,3 +1,10 @@
+# v1.6.3-dev
+
+Fixed:
+
+- White screen when going back to home
+- Timer continuing after question answered
+- Questions below deleted question also being deleted
 # v1.6.2-dev
 
 Fixed:
