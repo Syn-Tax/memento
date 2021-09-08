@@ -42,10 +42,6 @@ function Folder(props) {
     const { pathStr } = useParams()
     const path = pathStr.split("-")
 
-    console.log(window.location.href)
-    console.log(path)
-
-
     let parentPath
 
     if (path.length === 1) {
@@ -53,21 +49,22 @@ function Folder(props) {
     } else {
         let parentPth = [...path]
         parentPth.pop()
-        parentPath = `/folder/${parentPth.join('-')}`
+        parentPath = parentPth.join('-')
+        parentPath = `/folder/${parentPath}`
     }
 
-    console.log(path)
     let pth = getPath(path, props.gridItems, parentPath)
 
-    console.log(pth)
+    console.log("PARENT PATH: ", parentPath)
 
     let {lists, parent} = pth
 
     return (
         <div>
+          { /*
             <div style={{ position: "static" }}>
                 <NavbarToggle lists={props.gridItems} />
-            </div>
+            </div> */ }
 
             <Link to={parentPath}>
                 <BackButton />

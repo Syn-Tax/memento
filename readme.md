@@ -18,7 +18,7 @@ Go to the releases page - https://github.com/Syn-Tax/memento/releases - and down
 
 # Changelog
 
-## v1.5.0
+## v1.6.3-dev
 
 Features:
 
@@ -30,4 +30,5 @@ Features:
 - Edit, delete and move lists
 - Scoring system to make use competitive
 - Practice lists of questions you don't know
+- Share lists with friends or classmates
 

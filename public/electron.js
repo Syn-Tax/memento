@@ -3,8 +3,11 @@
 const {app, BrowserWindow, nativeTheme, protocol} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev');
+const debug = require('electron-debug')
 
 const dataFolder = path.join(app.getPath('userData'), "./Data")
+
+debug({isEnabled: true})
 
 function createWindow () {
   nativeTheme.themeSource = 'light'

@@ -10,11 +10,13 @@ import { Grid } from '@material-ui/core';
 function Home(props) {
   const [sortMethod, setSortMethod] = React.useState("TYPE")
 
+  console.log(window.location.href)
+
   return (
     <div>
       <div style={{ position: "static" }}>
         <Welcome />
-        <NavbarToggle lists={props.gridItems} />
+        {/*<NavbarToggle lists={props.gridItems} />*/}
       </div>
 
       <Grid container style={{ top: "27%", position: "absolute", height: "73%" }}>

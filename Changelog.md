@@ -1,3 +1,36 @@
+# v1.6.3-dev
+
+Fixed:
+
+- White screen when going back to home
+- Timer continuing after question answered
+- Questions below deleted question also being deleted
+# v1.6.2-dev
+
+Fixed:
+
+- Practice questions bugging when no more questions to practice
+
+# v1.6.1-dev
+
+Fixed:
+
+- Moving lists into nested folders
+
+# v1.6.0-dev
+
+Added Features:
+
+- Sharing lists
+
+Fixed:
+
+- Allow for devtools to be opened
+- Optimized submit methods
+- Optimized deletion of lists
+- Fixed "open" menu item
+- Removed hamburger menu, fixing several bugs
+
 # v1.5.0
 
 Added Features:
