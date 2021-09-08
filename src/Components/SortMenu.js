@@ -6,9 +6,11 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const sortOptions = [
     'TYPE',
-    'NAME',
+    'NAME'
+    /*
     'CREATED',
     'LAST USE'
+    */
 ]
 
 function SortMenu(props) {

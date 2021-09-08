@@ -78,7 +78,7 @@ function CreateList(props) {
     
     const deleteQuestion = (index) => {
         let qs = questions
-        qs.splice(index)
+        qs.splice(index, 1)
         setQuestions([...qs])
     }
 

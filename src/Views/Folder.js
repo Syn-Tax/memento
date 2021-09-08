@@ -50,9 +50,12 @@ function Folder(props) {
         let parentPth = [...path]
         parentPth.pop()
         parentPath = parentPth.join('-')
+        parentPath = `/folder/${parentPath}`
     }
 
     let pth = getPath(path, props.gridItems, parentPath)
+
+    console.log("PARENT PATH: ", parentPath)
 
     let {lists, parent} = pth
 
@@ -63,7 +66,7 @@ function Folder(props) {
                 <NavbarToggle lists={props.gridItems} />
             </div> */ }
 
-            <Link to={`/folder/${parentPath}`}>
+            <Link to={parentPath}>
                 <BackButton />
             </Link>
 
