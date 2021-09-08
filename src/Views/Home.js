@@ -10,6 +10,8 @@ import { Grid } from '@material-ui/core';
 function Home(props) {
   const [sortMethod, setSortMethod] = React.useState("TYPE")
 
+  console.log(window.location.href)
+
   return (
     <div>
       <div style={{ position: "static" }}>
