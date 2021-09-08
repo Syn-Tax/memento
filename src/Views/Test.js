@@ -54,6 +54,7 @@ function Test(props) {
     const [continueDialog, setContinueDialog] = React.useState(false)
     const [endDialog, setEndDialog] = React.useState(false)
     const [correct, setCorrect] = React.useState(true)
+    const [timerActive, setTimerActive] = React.useState(true)
 
     if (questionIndex >= questions.length) {
         let split = pathStr.split("-")
@@ -72,11 +73,21 @@ function Test(props) {
     }
 
     React.useEffect(() => {
-        const interval = setTimeout(() => incrementTime(), 5000);
+        let interval = null
+        if (timerActive) {
+            interval = setTimeout(() => incrementTime(), 5000);
+        } else if (!timerActive && time !== 0) {
+            clearInterval(interval)
+        }
         return () => {
             clearTimeout(interval);
         };
-    }, [time]); // eslint-disable-line
+    }, [timerActive, time]); // eslint-disable-line
+
+    const resetTime = () => {
+        setTimerActive(false)
+        setTime(0)
+    }
 
     const incrementTime = () => {
         if (queryStr["speed"] !== 1) {
@@ -130,6 +141,7 @@ function Test(props) {
         let random = Math.random()
         let index = Math.floor(random*questions.length)
         setQuestionIndex(index)
+        setTimerActive(true)
     }
 
     const correctAnswer = (value) => {
