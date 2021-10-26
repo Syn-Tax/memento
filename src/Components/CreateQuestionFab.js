@@ -1,6 +1,10 @@
 import { Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-
+/** 
+* @function CreateQuestionFab - Button to add a new question to a list
+* @param {Function} props.onClick - The function that is run when the button is clicked by the user
+* @return {JSX} - JSX of the button
+*/
 function CreateQuestionFab(props) {
     return (
         <div style={{ paddingTop: "3%" }}>
