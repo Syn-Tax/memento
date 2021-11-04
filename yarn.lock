@@ -7211,6 +7211,14 @@
   "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.789.tgz"
   "version" "1.3.789"
 
+"electron-window-state@^5.0.3":
+  "integrity" "sha512-1mNTwCfkolXl3kMf50yW3vE2lZj0y92P/HYWFBrb+v2S/pCka5mdwN3cagKm458A7NjndSwijynXgcLWRodsVg=="
+  "resolved" "https://registry.npmjs.org/electron-window-state/-/electron-window-state-5.0.3.tgz"
+  "version" "5.0.3"
+  dependencies:
+    "jsonfile" "^4.0.0"
+    "mkdirp" "^0.5.1"
+
 "electron@^11.2.3":
   "integrity" "sha512-aQTRgRdHwCW68gxz9qvGCfOUvR4NBbdecLB/mEWX8fMncDFvPMmm+dq2D6zSWWVEKywmsj3+wMMVn3UV2Cl2CQ=="
   "resolved" "https://registry.npmjs.org/electron/-/electron-11.4.10.tgz"
