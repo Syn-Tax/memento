@@ -99,7 +99,6 @@ function Test(props) {
                 setTimeDialog(true)
             }
         }
-        console.log(time)
     }
 
     const backButtonClick = () => { // function that handles clicking the back button on the dialogs

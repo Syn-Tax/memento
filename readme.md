@@ -10,11 +10,21 @@ Go to the releases page - https://github.com/Syn-Tax/memento/releases - and down
 
 ## MacOS
 
-Go to the releases page - https://github.com/Syn-Tax/memento/releases - and download the Memento-X.X.X.dmg file. Then follow the instructions at https://www.wikihow.com/Install-Software-from-Unsigned-Developers-on-a-Mac to install unsigned software to your mac.
+Go to the releases page - https://github.com/Syn-Tax/memento/releases - and download the Memento-X.X.X.zip file. Once it has downloaded, extract the zip to your Applications folder
 
 ## Ubuntu/Debian
 
-Go to the releases page - https://github.com/Syn-Tax/memento/releases - and download the .deb file, then run it and install it with the software center or run `sudo dpkg -i [NAME_OF_FILE_HERE]`, or use your preferred way of installing .deb files.
+Go to the releases page - https://github.com/Syn-Tax/memento/releases - and download the .deb file, then run it and install it with the software center or run `sudo dpkg -i [PATH_TO_FILE_HERE]`, or use your preferred way of installing .deb files.
+
+# Editing List Files Directly
+
+The format of a `.list` file is as follows (tab separated):
+
+```
+(type)	(question)	(answers1;answer2)	(correct answer if multiple choice, starting from 0)
+text		question		answer1;answer 2
+multi		question		answer1;answer 2		0
+```
 
 # Changelog
 
