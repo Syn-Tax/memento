@@ -18,7 +18,7 @@ function Home(props) {
       <div style={{ position: "static" }}>
         <Welcome />
       </div>
-      {/* the component that allows the  */}
+      {/* the component that shows the root filetree  */}
       <Grid container style={{ top: "27%", position: "absolute", height: "73%" }}>
         <Grid item xs={3}>
           <CreateListFab path="Home" gridItems={props.gridItems} />

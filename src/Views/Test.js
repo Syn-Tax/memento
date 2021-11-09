@@ -95,10 +95,11 @@ function Test(props) {
         if (queryStr["speed"] !== 1) {
             setTime(time + 5)
 
-            if (time > timeLimits[queryStr["speed"]]) {
+            if (time >= timeLimits[queryStr["speed"]]) {
                 setTimeDialog(true)
             }
         }
+        console.log(time)
     }
 
     const backButtonClick = () => { // function that handles clicking the back button on the dialogs

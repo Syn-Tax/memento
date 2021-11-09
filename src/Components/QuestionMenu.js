@@ -3,6 +3,8 @@ import { Fab, Menu, MenuItem } from '@material-ui/core';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 
+const options = { "text": "TEXT", "multi": "CHOICE" }
+
 /** 
 * @function QuestionMenu - Menu to select the type of the question on creation
 * @return {JSX} - JSX for the component
