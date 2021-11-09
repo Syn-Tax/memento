@@ -11,7 +11,7 @@ const options = { "text": "TEXT", "multi": "CHOICE" }
 */
 function QuestionMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null)
-    const [selected, setSelected] = React.useState("text")
+    const [selected, setSelected] = React.useState(props.type ? props.type : "text")
 
     const openMenu = (event) => { // function that handles opening the menu
         setAnchorEl(event.currentTarget)

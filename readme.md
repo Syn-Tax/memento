@@ -26,6 +26,8 @@ text	question	answer1;answer 2
 multi	question	answer1;answer 2	0
 ```
 
+Images cannot be added when editing the `.list` file, they must be added in the list editor.
+
 # Changelog
 
 ## v1.6.7

@@ -46,12 +46,12 @@ function SetQuestionImage(props) {
   }
 
   return (
-    <Grid container>
-      <Grid item xs={6}>
+    <Grid container style={{ position: "absolute", height: "10vh", top: "9vh" }}>
+      <Grid item xs={6} style={{ paddingTop: "0.5vh" }}>
         Image: {containsImage ? "yes" : "no"}
       </Grid>
       <Grid item xs={6}>
-        <Fab variant="extended" onClick={browseImage} style={{ backgroundColor: "white", width: 150, position: "absolute", top: "8vh", left: "50%" }} >
+        <Fab variant="extended" onClick={browseImage} style={{ backgroundColor: "white", width: 150 }} >
           <FolderOpenIcon style={{ opacity: 0.7, position: "absolute", left: 25 }} />
           <p style={{ position: "absolute", right: 30, top: 0 }} >Browse</p>
         </Fab>

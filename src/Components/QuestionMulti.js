@@ -9,7 +9,7 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 */
 function QuestionMulti(props) {
   const [anchorEl, setAnchorEl] = React.useState(null)
-  const [selected, setSelected] = React.useState(0)
+  const [selected, setSelected] = React.useState(props.question ? props.question["CORRECT"] : 0)
 
   const openMenu = (event) => { // function that handles opening the menu
     setAnchorEl(event.currentTarget)
