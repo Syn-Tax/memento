@@ -12,20 +12,30 @@ const appPath = electron.remote.app.getPath('userData')
 const dataFolder = path.join(appPath, "./Data/")
 const imagesFolder = path.join(dataFolder, "./.images")
 
+/** 
+* @function SetQuestionImage - Set the image related to a question when a list is being created
+* @return {JSX} - The JSX for the component
+*/
 function SetQuestionImage(props) {
   const [containsImage, setContainsImage] = React.useState(props.question["IMAGE_ID"])
   const [currentId, setCurrentId] = React.useState(null)
 
-  const browseImage = (e) => {
-    let value = window.electron.dialog.showOpenDialogSync({properties: ['openFile'], filters: [{ name: "Images", extensions: ["png", "jpg", "jpeg", "gif"] }]})[0]
+  const browseImage = (e) => { // function to select an image
+    let value = window.electron.dialog.showOpenDialogSync({ // browse for the image
+      properties: ['openFile'],
+      filters: [{
+        name: "Images",
+        extensions: ["png", "jpg", "jpeg", "gif"]
+      }]
+    })[0]
 
-    if (!value) {
-      return
-    }
+    if (!value) { return } // if no image is selected then return
 
-    if (containsImage) {
+    if (containsImage) { // if the question already contains an image then delete it from the images folder
       fs.unlinkSync(path.join(imagesFolder, currentId))
     }
+
+    // otherwise set the chosen image
 
     let id = copyImg(value)
     let name = path.basename(value)
@@ -45,7 +55,7 @@ function SetQuestionImage(props) {
           <FolderOpenIcon style={{ opacity: 0.7, position: "absolute", left: 25 }} />
           <p style={{ position: "absolute", right: 30, top: 0 }} >Browse</p>
         </Fab>
-    </Grid>
+      </Grid>
     </Grid>
   )
 }

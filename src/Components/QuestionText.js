@@ -1,6 +1,10 @@
 import React from 'react'
 import { Grid, TextField } from '@material-ui/core'
 
+/** 
+* @function QuestionText - Component that handles the creation of text based answers
+* @return {JSX} - The JSX for the component
+*/
 function QuestionText(props) {
   return (
     <Grid item container xs={3} spacing={3}>

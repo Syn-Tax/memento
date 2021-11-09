@@ -1,7 +1,6 @@
 import React from 'react';
 import Home from './Views/Home';
 import Folder from './Views/Folder';
-import CreateFolder from './Views/CreateFolder';
 import CreateList from './Views/CreateList';
 import List from './Views/List';
 import Test from './Views/Test';
@@ -17,40 +16,34 @@ const appPath = electron.remote.app.getPath('userData');
 
 const dataFolder = path.join(appPath, "./Data/")
 
-console.log(appPath)
-if (!fs.existsSync(dataFolder)){
+// create the data directory if it doesn't exist
+if (!fs.existsSync(dataFolder)) {
     fs.mkdirSync(dataFolder);
 }
 
+// create the images directory if it doesn't exist
 if (!fs.existsSync(path.join(dataFolder, "./.images"))) {
     fs.mkdirSync(path.join(dataFolder, "./.images"))
 }
 
+// get the files in the data directory 
 let files = getFiles(dataFolder)
 
+/** 
+* @function App - the base component
+* @return {JSX} - The JSX for the current page
+*/
 function App() {
+    // state for storing the files in object form
     const [gridItems, setGridItems] = React.useState(files)
 
-    const recreateFiles = () => {
-        files = getFiles(dataFolder)
-        setGridItems(files)
-    }
-
-    fs.watch(dataFolder, {recursive: true}, (event, file) => {
+    // if a file has been changed, get the files again
+    fs.watch(dataFolder, { recursive: true }, (event, file) => {
         files = getFiles(dataFolder)
         setGridItems(files)
     })
 
-    /*
-    let watcher = chokidar.watch(dataFolder)
-
-    watcher.on('all', (evt, name) => {
-        recreateFiles()
-    })
-
-    console.log(watcher.getWatched())
-    */
-
+    // return the current page using react-router
     return (
         <div className="App">
             <Router>
@@ -66,9 +59,6 @@ function App() {
                     </Route>
                     <Route path="/test/:pathStr">
                         <Test />
-                    </Route>
-                    <Route path="/create-folder/:pathStr">
-                        <CreateFolder gridItems={gridItems} />
                     </Route>
                     <Route path="/create-list/:pathStr">
                         <CreateList gridItems={gridItems} />

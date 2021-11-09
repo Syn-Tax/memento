@@ -4,6 +4,10 @@ import queryString from 'query-string'
 import { Fab } from "@material-ui/core"
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
+/** 
+* @function End - page that displays when a list is finished
+* @return {JSX} - the JSX of the component
+*/
 function End(props) {
   const { search } = useLocation()
   const { pathStr } = useParams()
@@ -12,7 +16,7 @@ function End(props) {
 
   const history = useHistory()
 
-  const continueButtonClick = () => {
+  const continueButtonClick = () => { // function that handles when the continue button is clicked
     let split = pathStr.split('-')
     let path
 
@@ -20,18 +24,17 @@ function End(props) {
       path = "/"
     } else {
       split.pop()
-      path = "/folder/"+split.join("-")
+      path = "/folder/" + split.join("-")
     }
 
-    console.log(path)
-    history.push(path)
+    history.push(path) // redirect the user
   }
 
   return (
     <div>
       <div>
         <div style={{ paddingTop: "25vh", fontSize: "25pt" }}>Well Done! Your score is below:</div>
-        <div style={{ paddingTop: "2vh", fontSize: "50pt" }}>{Math.round(queryStr["correct"]/queryStr["total"]*100)}%</div>
+        <div style={{ paddingTop: "2vh", fontSize: "50pt" }}>{Math.round(queryStr["correct"] / queryStr["total"] * 100)}%</div>
         <div style={{ paddingTop: "1vh", fontSize: "25pt" }}>Correct: {queryStr["correct"]}</div>
         <div style={{ paddingTop: "0.5vh", fontSize: "25pt" }}>Total: {queryStr["total"]}</div>
         <Fab variant="extended" style={{ backgroundColor: "white", position: "absolute", top: "80vh", right: "25vw" }} onClick={continueButtonClick}>
