@@ -22,8 +22,8 @@ The format of a `.list` file is as follows (tab separated):
 
 ```
 (type)	(question)	(answers1;answer2)	(correct answer if multiple choice, starting from 0)
-text		question		answer1;answer 2
-multi		question		answer1;answer 2		0
+text	question	answer1;answer 2
+multi	question	answer1;answer 2	0
 ```
 
 # Changelog
