@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid, TextField, Fab, Menu, MenuItem } from '@material-ui/core'
-import TextFieldsIcon from '@material-ui/icons/TextFields'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 
 /** 
@@ -10,6 +9,9 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 function QuestionMulti(props) {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [selected, setSelected] = React.useState(props.question ? props.question["CORRECT"] : 0)
+  const [selectedField, setSelectedField] = React.useState(0)
+
+  const refs = Array(props.question["ANSWERS"].length).fill(React.useRef(null))
 
   const openMenu = (event) => { // function that handles opening the menu
     setAnchorEl(event.currentTarget)
@@ -25,15 +27,26 @@ function QuestionMulti(props) {
     setSelected(i)
   }
 
+  // const keyPress = (e, i) => {
+  //   if (e.key === 'Enter' && e.shiftKey) {
+  //     e.preventDefault()
+  //     props.addQuestion()
+  //   } else if (e.key === 'Enter') {
+  //     e.preventDefault()
+  //     props.addAnswer()
+  //     // refs[i + 1].current.focus()
+  //   }
+  // }
+
+  const onFocus = (e, i) => {
+
+  }
+
   return (
-    <Grid item container xs={3} spacing={3}>
-      {props.question["ANSWERS"].map((answer, i) => {
-        return (
-          <Grid item xs={12}>
-            <TextField defaultValue={answer || ""} onChange={(e) => (props.answerChange(e, i))} variant="outlined" label={props.invalidAnswer ? "Error" : "Answer"} error={props.invalidAnswer} helperText={props.invalidAnswer ? "Answer cannot contain ';'" : ""} style={{ width: "100%" }} />
-          </Grid>
-        )
-      })}
+    <Grid item container xs={4} spacing={3}>
+      <Grid item xs={12}>
+        <TextField defaultValue={props.question["ANSWERS"].join(';') || ""} onChange={(e) => (props.answerChange(e))} variant="outlined" label={props.invalidAnswer ? "Error" : "Answers - Separate with ';'"} style={{ width: "100%" }} onKeyPress={(e) => keyPress(e)} />
+      </Grid>
       <Grid item xs={12}>
         <Fab variant="extended" style={{ backgroundColor: "white", width: 250 }} onClick={openMenu}>
           <p style={{ textAlign: "center" }}>Correct Answer: {selected + 1}</p>

@@ -34,7 +34,7 @@ function End(props) {
     <div>
       <div>
         <div style={{ paddingTop: "25vh", fontSize: "25pt" }}>Well Done! Your score is below:</div>
-        <div style={{ paddingTop: "2vh", fontSize: "50pt" }}>{Math.round(queryStr["correct"] / queryStr["total"] * 100)}%</div>
+        <div style={{ paddingTop: "2vh", fontSize: "50pt" }}>{isNaN(Math.round(queryStr["correct"] / queryStr["total"] * 100)) ? 0 : Math.round(queryStr["correct"] / queryStr["total"] * 100)}%</div>
         <div style={{ paddingTop: "1vh", fontSize: "25pt" }}>Correct: {queryStr["correct"]}</div>
         <div style={{ paddingTop: "0.5vh", fontSize: "25pt" }}>Total: {queryStr["total"]}</div>
         <Fab variant="extended" style={{ backgroundColor: "white", position: "absolute", top: "80vh", right: "25vw" }} onClick={continueButtonClick}>

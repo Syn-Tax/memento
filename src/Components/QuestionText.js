@@ -8,13 +8,9 @@ import { Grid, TextField } from '@material-ui/core'
 function QuestionText(props) {
   return (
     <Grid item container xs={3} spacing={3}>
-      {props.question["ANSWERS"].map((answer, i) => {
-        return (
-          <Grid item xs={12}>
-            <TextField defaultValue={answer || ""} onChange={(e) => (props.answerChange(e, i))} variant="outlined" label={props.invalidAnswer ? "Error" : "Answer"} error={props.invalidAnswer} helperText={props.invalidAnswer ? "Answer cannot contain ';'" : ""} style={{ width: "100%" }} />
-          </Grid>
-        )
-      })}
+      <Grid item xs={12}>
+        <TextField defaultValue={props.question["ANSWERS"].join(';') || ""} onChange={(e) => (props.answerChange(e))} variant="outlined" label="Answers - Separate with ';'" style={{ width: "100%" }} />
+      </Grid>
     </Grid>
   )
 }

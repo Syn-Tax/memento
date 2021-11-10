@@ -17,13 +17,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 function CreateQuestion(props) {
   const [invalidAnswer, setInvalidAnswer] = React.useState(false) // flag if the answer is invalid
 
-  const answerChange = (event, index) => { // function that handles a change in the answer input
-    let symbolRegex = /^[a-zA-Z0-9-*/&^#@()[\]=+_\\., ]*$/ // regular expression to check for valid characters in an answer (other characters are used in the file format as delimiters and markers etc.)
+  const answerChange = (event) => { // function that handles a change in the answer input
+    let symbolRegex = /^[a-zA-Z0-9-*/&^#@()[\]=+_\\.,; ]*$/ // regular expression to check for valid characters in an answer (other characters are used in the file format as delimiters and markers etc.)
     if (!symbolRegex.exec(event.target.value)) { // validate the answer
       setInvalidAnswer(true)
     } else {
       setInvalidAnswer(false)
-      props.answerChange(index, event) // send the validated answer to the parent component
+      props.answerChange(event) // send the validated answer to the parent component
     }
   }
 
@@ -47,12 +47,7 @@ function CreateQuestion(props) {
 
       </Grid>
       {/* input to set the answer to the question */}
-      <QuestionBlock type={props.question["TYPE"]} question={props.question} invalidAnswer={invalidAnswer} answerChange={answerChange} setCorrect={props.setCorrect} />
-      {/* buttons to create and remove answers */}
-      <Grid item container xs={1} spacing={3}>
-        <Fab display="inline" size="small" style={{ backgroundColor: "white", top: "2vh" }} onClick={props.addAnswer}><AddIcon style={{ opacity: 0.7 }} /></Fab>
-        <Fab display="inline" size="small" style={{ backgroundColor: "white", top: "2vh", left: "20%" }} onClick={props.removeAnswer}><RemoveIcon style={{ opacity: 0.7 }} /></Fab>
-      </Grid>
+      <QuestionBlock type={props.question["TYPE"]} question={props.question} invalidAnswer={invalidAnswer} answerChange={answerChange} setCorrect={props.setCorrect} addQuestion={props.addQuestion} addAnswer={props.addAnswer} />
       {/* button to remove the question */}
       <Grid item xs={1}>
         <Fab style={{ backgroundColor: "white", left: "10%" }} onClick={props.deleteQuestion}><DeleteIcon style={{ opacity: 0.7 }} /></Fab>

@@ -30,7 +30,7 @@ Images cannot be added when editing the `.list` file, they must be added in the 
 
 # Changelog
 
-## v1.6.7
+## v1.6.9
 
 Features:
 
