@@ -87,7 +87,16 @@ function ListItem(props) {
     // get the current and new path of the item
     let split = props.pth.split('-')
 
-    let folderSplit = props.parent_path.split('-')
+    console.log(props.parent_path)
+
+    let folderSplit = props.parent_path.split('/')
+
+    console.log(folderSplit)
+
+    folderSplit.shift()
+    folderSplit.shift()
+
+    console.log(folderSplit)
 
     let oldpath
     let newpath
