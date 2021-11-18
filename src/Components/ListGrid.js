@@ -28,7 +28,7 @@ function ListGrid(props) {
   items.push([]) // create some blank space at the bottom of the page
 
   const handleMove = (item, monitor, pth, name, path) => { // function to handle drag/drop to move items
-    move(item, path + "-" + pth, name) // run the util file to move files/folders
+    move(item, pth, name) // run the util file to move files/folders
   }
 
   return (

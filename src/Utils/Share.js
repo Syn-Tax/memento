@@ -2,25 +2,29 @@ import { loadList } from './List'
 
 const electron = window.require('electron')
 const path = electron.remote.require('path')
-const fs = electron.remote.require('fs-extra')
 const zipdir = electron.remote.require('zip-dir')
 const DecompressZip = electron.remote.require('decompress-zip')
 
 const tempFolder = path.join(electron.remote.app.getPath('temp'), "./memento")
 const dataFolder = path.join(electron.remote.app.getPath('userData'), "./Data")
+
+const fse = electron.remote.require('fs-extra')
+
 /** 
 * @function copyImport - Copy extracted folders and images into the data directory
 * @param {String} pth - Filesystem path of the imported file/folder
 */
 function copyImport(pth) {
-  fs.copy(tempFolder,
+  fse.copy(tempFolder,
     pth,
     (err) => {
       if (err) throw err
-    }) // copy the folder/file itself
+    }
+  ) // copy the folder/file itself
 
-  fs.readdirSync(path.join(tempFolder, "./.images")).forEach(file => {
-    fs.copy(path.join(tempFolder, "./.images") + file,
+  // For every file in the temp/.images directory copy it to the Data/.images directory
+  fse.readdirSync(path.join(tempFolder, "./.images")).forEach(file => {
+    fse.copy(path.join(tempFolder, "./.images") + file,
       path.join(dataFolder, "./.images") + file,
       (err) => {
         if (err) throw err
@@ -34,8 +38,8 @@ function copyImport(pth) {
 * @param {String} folderPathStr - the path to which the folder should be imported
 */
 export function importItem(zipPath, folderPathStr) {
-  if (!fs.existsSync(tempFolder)) { // create the temp folder if it doesn't exist
-    fs.mkdirSync(tempFolder, { recursive: true })
+  if (!fse.existsSync(tempFolder)) { // create the temp folder if it doesn't exist
+    fse.mkdirSync(tempFolder, { recursive: true })
   }
 
   // convert the String path to a filepath
@@ -69,8 +73,8 @@ export function importItem(zipPath, folderPathStr) {
 * @param {Array} imgs - the array of images to be added to
 */
 function getImgs(filePath, imgs) {
-  fs.readdirSync(filePath).forEach(file => { // loop through each item in the directory
-    if (fs.lsstatSync(dir + file).isDirectory()) { // if this item is a directory then call recursively
+  fse.readdirSync(filePath).forEach(file => { // loop through each item in the directory
+    if (fse.lsstatSync(dir + file).isDirectory()) { // if this item is a directory then call recursively
       getImgs(dir + file, imgs)
     }
 
@@ -95,8 +99,8 @@ function getImgs(filePath, imgs) {
 export function share(filePath, file, type) {
   const imgPath = path.join(tempFolder, "./.images")
 
-  if (!fs.existsSync(imgPath)) { // create the images folder in the temp directory
-    fs.mkdirSync(imgPath, { recursive: true })
+  if (!fse.existsSync(imgPath)) { // create the images folder in the temp directory
+    fse.mkdirSync(imgPath, { recursive: true })
   }
 
   if (type === "List") { // if the type of the item is a list
@@ -105,7 +109,7 @@ export function share(filePath, file, type) {
 
     questions.forEach((question) => {
       if (question["IMAGE_ID"]) {
-        fs.copyFile(path.join(dataFolder, "./.images", question["IMAGE_ID"]),
+        fs - extra.copyFile(path.join(dataFolder, "./.images", question["IMAGE_ID"]),
           path.join(imgPath, question["IMAGE_ID"]),
           (err) => {
             if (err) throw err
@@ -123,7 +127,7 @@ export function share(filePath, file, type) {
     }
 
     // copy the list to the temp folder
-    fs.copyFile(pth, path.join(tempFolder, pthS.pop()), (err) => {
+    fs - extra.copyFile(pth, path.join(tempFolder, pthS.pop()), (err) => {
       if (err) throw err
     })
   } else { // if the item is a folder
@@ -131,7 +135,7 @@ export function share(filePath, file, type) {
     getImgs(filePath, imgs) // get all the images associated with lists within that folder
 
     imgs.forEach((img) => { // copy each of them to the temporary images folder
-      fs.copyFile(path.join(dataFolder, "./.images", img),
+      fse.copyFile(path.join(dataFolder, "./.images", img),
         path.join(imgPath, img),
         (err) => {
           if (err) throw err
@@ -148,7 +152,7 @@ export function share(filePath, file, type) {
     }
 
     // copy the folder to the temp directory
-    fs.copy(pth, path.join(tempFolder, pthS.pop()), (err) => {
+    fse.copy(pth, path.join(tempFolder, pthS.pop()), (err) => {
       if (err) throw err
     })
   }
@@ -159,5 +163,5 @@ export function share(filePath, file, type) {
   })
 
   // delete the temporary folder so it can be used again
-  fs.rmdir(tempFolder, { recursive: true })
+  fse.rmdir(tempFolder, { recursive: true })
 }

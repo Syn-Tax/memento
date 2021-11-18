@@ -1,3 +1,7 @@
+# v1.6.10
+
+Minor fixes
+
 # v1.6.9
 
 Minor fixes and changes

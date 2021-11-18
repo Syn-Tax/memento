@@ -59,16 +59,15 @@ app.whenReady().then(() => {
 
   // register the custom file protocol for getting images dynamically
   protocol.registerFileProtocol('imgid', (request, callback) => {
-    const url = request.url.substr(8)
-    console.log(url)
-    callback({ path: path.join(dataFolder, ".images", url) })
+    const url = request.url.substring(8) //get the path to the requested image
+    callback({ path: path.join(dataFolder, ".images", url) }) // return the requested image
   })
 
   // boilerplate for MacOS
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    if (BrowserWindow.getAllWindows().length === 0) createWindow(windowState)
   })
 })
 

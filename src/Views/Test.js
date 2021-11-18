@@ -65,7 +65,7 @@ function Test(props) {
     let split = pathStr.split("-")
     let name = split.pop().split(".")[0]
 
-    saveList(questions, name, split.join("-")).catch(err => console.log(err))
+    saveList(questions, name, split.join("-")).catch(err => console.log(err)) // save the list with a promise
     history.push(`/end/${pathStr}?total=${totalCount}&correct=${correctCount}`)
   }
 
@@ -78,18 +78,20 @@ function Test(props) {
     parent_path = "/"
   }
 
-  // react effect for incrementing the timer
+  // react hook for incrementing the timer
   React.useEffect(() => {
     let interval = null
+
     if (timerActive) {
-      interval = setTimeout(() => incrementTime(), 1000);
+      interval = setTimeout(() => incrementTime(), 1000) // use a callback to step the timer
     } else if (!timerActive && time !== 0) {
-      clearInterval(interval)
+      clearInterval(interval) // stop the timer
     }
+
     return () => {
-      clearTimeout(interval);
+      clearTimeout(interval) // when stopped, clear the timer
     };
-  }, [timerActive, time]); // eslint-disable-line
+  }, [timerActive, time])
 
   const incrementTime = () => { // function that increments the timer and checks if the time has run out
     if (queryStr["speed"] !== 1) {
@@ -162,8 +164,6 @@ function Test(props) {
         questions[questionIndex]["INCORRECT"] += 1
       }
     }
-
-
 
     setContinueDialog(true)
   }
