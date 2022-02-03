@@ -35,7 +35,7 @@ function SortMenu(props) {
 
     return (
         <div style={{ backgroundColor: "white", paddingRight: "3%" }}>
-            <Fab variant="extended" style={{ backgroundColor: "white", width: 150, fontSize: 14 }} onClick={openMenu}>
+            <Fab variant="extended" style={{ backgroundColor: "white", width: 150, fontSize: 14, position: "absolute", right: "20vw" }} onClick={openMenu}>
                 <SortByAlphaIcon style={{ position: "absolute", left: 10, opacity: 0.7 }} />
                 <p style={{ textAlign: "center" }}>{sortOptions[selectedIndex]}</p>
                 <ArrowLeftIcon style={{ position: 'absolute', right: 10, opacity: 0.7 }} />

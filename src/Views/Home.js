@@ -1,5 +1,4 @@
 import React from 'react';
-import Welcome from '../Components/Welcome';
 import CreateListFab from '../Components/CreateListFab';
 import SortMenu from '../Components/SortMenu';
 import ListGrid from '../Components/ListGrid';
@@ -14,22 +13,18 @@ function Home(props) {
 
   return (
     <div>
-      {/* the welcome message */}
-      <div style={{ position: "static" }}>
-        <Welcome />
-      </div>
       {/* the component that shows the root filetree  */}
-      <Grid container style={{ top: "27%", position: "absolute", height: "73%" }}>
-        <Grid item xs={3}>
+      <Grid container style={{ top: "10%", position: "absolute", height: "73%" }}>
+        <Grid item xs={1}>
           <CreateListFab path="Home" gridItems={props.gridItems} />
         </Grid>
-        <Grid item xs={6}></Grid>
-        <Grid item xs={3} style={{ display: 'flex', flexDirection: 'row' }} >
+        <Grid item xs={5}></Grid>
+        <Grid item xs={1} style={{ display: 'flex', flexDirection: 'row' }} >
           <SortMenu changeState={(method) => setSortMethod(method)} />
         </Grid>
       </Grid>
 
-      <ListGrid items={props.gridItems} sortMethod={sortMethod} top={35} />
+      <ListGrid items={props.gridItems} sortMethod={sortMethod} top={20} />
 
     </div>
   );

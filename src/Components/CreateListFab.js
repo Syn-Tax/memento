@@ -88,7 +88,7 @@ function CreateListFab(props) {
   return (
     <div>
       {/* BUTTON */}
-      <Fab variant="extended" style={{ backgroundColor: "white" }} onClick={OpenMenu}>
+      <Fab variant="extended" style={{ backgroundColor: "white", left: "17vw", position: "absolute" }} onClick={OpenMenu}>
         <AddIcon style={{ opacity: 0.7 }} />
         Create
       </Fab>

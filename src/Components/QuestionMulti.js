@@ -1,6 +1,7 @@
 import React from 'react'
 import { Grid, TextField, Fab, Menu, MenuItem } from '@material-ui/core'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
+import { HotKeys, Handlers } from 'react-keyboard';
 
 /** 
 * @function QuestionMulti - Component that handles the creation of multiple choice answers
@@ -27,16 +28,13 @@ function QuestionMulti(props) {
     setSelected(i)
   }
 
-  // const keyPress = (e, i) => {
-  //   if (e.key === 'Enter' && e.shiftKey) {
-  //     e.preventDefault()
-  //     props.addQuestion()
-  //   } else if (e.key === 'Enter') {
-  //     e.preventDefault()
-  //     props.addAnswer()
-  //     // refs[i + 1].current.focus()
-  //   }
-  // }
+  const keyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      props.addQuestion()
+      // refs[i + 1].current.focus()
+    }
+  }
 
   const onFocus = (e, i) => {
 

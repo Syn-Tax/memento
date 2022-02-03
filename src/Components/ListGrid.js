@@ -36,7 +36,7 @@ function ListGrid(props) {
       <DndProvider backend={HTML5Backend}> {/* Allow for drag and drop using react-dnd */}
         {/* display the "ListItem" component for each item, first looping through rows and then looping through each item in that row */}
         {items.map((row, i) => (
-          <Grid container spacing={3} style={{ top: `${props.top + (i * (height + verticalSpacing))}%`, position: "absolute", height: `${height}%` }}>
+          <Grid container spacing={0} style={{ top: `${props.top + (i * (height + verticalSpacing))}%`, position: "absolute", height: `${height}%` }}>
             <Grid item xs={2}></Grid>
 
             {row.map((item, j) => (

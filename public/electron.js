@@ -22,7 +22,8 @@ function createWindow(windowState) {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      webSecurity: false
     },
     preload: path.join(__dirname, "preload.js")
   })
@@ -56,12 +57,13 @@ app.whenReady().then(() => {
 
   // allow the window state to be managed
   windowState.manage(win)
-
+  /*
   // register the custom file protocol for getting images dynamically
-  protocol.registerFileProtocol('imgid', (request, callback) => {
-    const url = request.url.substring(8) //get the path to the requested image
+  protocol.registerFileProtocol('file', (request, callback) => {
+    const url = decodeURI(request.url.replace('file://', '')) //get the path to the requested image
     callback({ path: path.join(dataFolder, ".images", url) }) // return the requested image
   })
+  */
 
   // boilerplate for MacOS
   app.on('activate', function () {

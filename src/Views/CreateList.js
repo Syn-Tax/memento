@@ -129,7 +129,7 @@ function CreateList(props) {
         <TextField onChange={nameChange} value={name} variant="outlined" label={invalidName ? "Error" : "Name"} error={invalidName} helperText={invalidName ? errorMessage : ""} style={{ width: "25%" }} />
 
         {questions.map((question, i) => {
-          return <CreateQuestion question={question} setImage={(id, name) => (setImage(i, id, name))} addAnswer={() => (addAnswer(i))} removeAnswer={() => (removeAnswer(i))} deleteQuestion={() => (deleteQuestion(i))} titleChange={(e) => (titleChange(i, e))} answerChange={(e) => (answerChange(i, e))} setCorrect={(j) => (setCorrect(i, j))} setType={(t) => (setType(i, t))} />
+          return <CreateQuestion question={question} setImage={(id, name) => (setImage(i, id, name))} addAnswer={() => (addAnswer(i))} removeAnswer={() => (removeAnswer(i))} deleteQuestion={() => (deleteQuestion(i))} titleChange={(e) => (titleChange(i, e))} answerChange={(e) => (answerChange(i, e))} setCorrect={(j) => (setCorrect(i, j))} setType={(t) => (setType(i, t))} addQuestion={newItem} />
         })}
 
         <CreateQuestionFab onClick={newItem} />

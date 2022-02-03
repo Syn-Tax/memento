@@ -33,7 +33,7 @@ function End(props) {
   return (
     <div>
       <div>
-        <div style={{ paddingTop: "25vh", fontSize: "25pt" }}>Well Done! Your score is below:</div>
+        <div style={{ paddingTop: "25vh", fontSize: "25pt" }}>Your score is:</div>
         <div style={{ paddingTop: "2vh", fontSize: "50pt" }}>{isNaN(Math.round(queryStr["correct"] / queryStr["total"] * 100)) ? 0 : Math.round(queryStr["correct"] / queryStr["total"] * 100)}%</div>
         <div style={{ paddingTop: "1vh", fontSize: "25pt" }}>Correct: {queryStr["correct"]}</div>
         <div style={{ paddingTop: "0.5vh", fontSize: "25pt" }}>Total: {queryStr["total"]}</div>

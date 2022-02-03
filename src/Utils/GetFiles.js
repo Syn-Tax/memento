@@ -7,7 +7,7 @@ const dataFolder = path.join(electron.remote.app.getPath('userData'), "./Data/")
 /** 
 * @function getFiles - function to get all the files in the data folder and format them into an array of objects with metadata
 * The file object contains the following structure
-* {"NAME" (String): The name of the file, "TYPE" (String): "List" or "Folder", "PATH" (String): The filesystem name of the file, "CONTAINS" (Array): The items contained within a folder}
+* {"NAME" (String): The name of the file, "TYPE" (String): "List" or "Folder", "PATH" (String): name of file, "CONTAINS" (Array): The items contained in a folder}
 * @param {String} dir - the directory to read files from
 * @return {Array} - an array of file objects that mimic the directory structure in the filesystem
 */
@@ -23,9 +23,11 @@ export function getFiles(dir) {
 
     if (type === "Folder") {
       let contains = getFiles(dir + file + "/") // get the contents of a folder by calling recursively
-      contents.push({ "NAME": file, "TYPE": type, "PATH": file, "CONTAINS": contains }) // create the file object and push it to the array
+      // create the file object and push it to the array
+      contents.push({ "NAME": file, "TYPE": type, "PATH": file, "CONTAINS": contains })
     } else {
-      contents.push({ "NAME": file.substring(0, file.length - 5), "TYPE": type, "PATH": file }) // create the file object and push it to the array
+      // create the file object and push it to the array
+      contents.push({ "NAME": file.substring(0, file.length - 5), "TYPE": type, "PATH": file })
     }
   })
   return contents // return the array of file objects

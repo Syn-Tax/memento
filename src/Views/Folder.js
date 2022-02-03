@@ -81,7 +81,7 @@ function Folder(props) {
         </Grid>
       </Grid>
 
-      <ListGrid path={pathStr} parent={parentPath} items={lists} sortMethod={sortMethod} top={18} />
+      <ListGrid path={pathStr} parent={parentPath} items={lists} sortMethod={sortMethod} top={20} />
 
     </div>
   );
