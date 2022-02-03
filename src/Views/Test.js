@@ -11,17 +11,18 @@ const electron = window.require('electron')
 const path = electron.remote.require('path')
 
 const timeLimits = {
-  "slow": 20,
-  "medium": 15,
-  "fast": 10,
-  "eat_my_dust": 5
-}
-
-const timeLimitsMulti = {
-  "slow": 20,
-  "medium": 15,
-  "fast": 10,
-  "eat_my_dust": 5
+  "text": {
+    "slow": 20,
+    "medium": 15,
+    "fast": 10,
+    "eat_my_dust": 5
+  },
+  "multi": {
+    "slow": 15,
+    "medium": 10,
+    "fast": 5,
+    "eat_my_dust": 3
+  }
 }
 
 const dataFolder = path.join(electron.remote.app.getPath('userData'), "./Data")
@@ -107,7 +108,7 @@ function Test(props) {
     if (queryStr["speed"] !== 1) {
       setTime(time + 1)
 
-      if (time >= timeLimits[queryStr["speed"]] && !continueDialog) {
+      if (time >= timeLimits[questions[questionIndex]["TYPE"]][queryStr["speed"]] && !continueDialog) {
         setTimeDialog(true)
       }
     }
