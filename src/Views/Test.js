@@ -17,6 +17,15 @@ const timeLimits = {
   "eat_my_dust": 5
 }
 
+const timeLimitsMulti = {
+  "slow": 20,
+  "medium": 15,
+  "fast": 10,
+  "eat_my_dust": 5
+}
+
+const dataFolder = path.join(electron.remote.app.getPath('userData'), "./Data")
+
 let questions
 
 /** 
@@ -24,6 +33,7 @@ let questions
 * @return {JSX} - the JSX for the component
 */
 function Test(props) {
+
   const { search } = useLocation()
   const { pathStr } = useParams()
   const history = useHistory()
@@ -128,6 +138,11 @@ function Test(props) {
     newQuestion()
   }
 
+  const tryAgain = () => {
+    setTime(1)
+    handleDialogClose()
+  }
+
   const isEnd = () => { // function that checks if the test has finished
     if (queryStr["question"] === "none") {
       return false
@@ -149,7 +164,7 @@ function Test(props) {
     setTotalCount(totalCount + 1)
   }
 
-  const correctAnswer = (value) => { // function that handles when an answer is answered correctly
+  const correctAnswer = (value) => { // function that handles when an answer is answered
     setCorrect(value)
 
     if (value) {
@@ -175,7 +190,7 @@ function Test(props) {
         <div>
           <div style={{ opacity: 0.7, paddingTop: "25vh", fontSize: "20pt" }}>Write the answer below</div>
           <div style={{ paddingTop: "1vh", fontSize: "50pt" }}>{questions[questionIndex]["TITLE"]}</div>
-          {questions[questionIndex]["IMAGE_ID"] && <div style={{ paddingTop: "5vh" }}><img src={`imgid://${questions[questionIndex]["IMAGE_ID"]}`} style={{ height: "25vh" }} /></div>}
+          {questions[questionIndex]["IMAGE_ID"] && <div style={{ paddingTop: "5vh" }}><img src={`file://${path.join(dataFolder, ".images", questions[questionIndex]["IMAGE_ID"])}`} style={{ height: "25vh" }} target="_blank" /></div>}
           {questions[questionIndex]["TYPE"] === "multi"
             ? <MultiAnswer question={questions[questionIndex]} correctAnswer={correctAnswer} />
             : <SubmitAnswer question={questions[questionIndex]} correctAnswer={correctAnswer} />
@@ -185,10 +200,11 @@ function Test(props) {
 
       {/* Dialogs for when the user answers a question, runs out of time or finishes the test */}
       <Dialog open={continueDialog} onClose={handleDialogClose} >
-        <DialogTitle>{`${correct ? "Well Done!" : "So Close!"} Do you wish to continue?`}</DialogTitle>
+        <DialogTitle>{`${correct ? "Well Done!" : `So Close! The ${questions[questionIndex]["ANSWERS"].length === 1 || questions[questionIndex]["TYPE"] === "multi" ? "answer was" : "answers were"} actually: ${questions[questionIndex]["TYPE"] === "multi" ? questions[questionIndex]["ANSWERS"][questions[questionIndex]["CORRECT"]] : questions[questionIndex]["ANSWERS"].join(", ")}.`} \n Do you wish to continue?`}</DialogTitle>
         <DialogActions>
           <Button onClick={backButtonClick}>Finish</Button>
           <Button onClick={continueFunc} autoFocus>Continue</Button>
+          {!correct && <Button onClick={tryAgain}>Try Again</Button>}
         </DialogActions>
       </Dialog>
 
@@ -204,6 +220,7 @@ function Test(props) {
         <DialogActions>
           <Button onClick={backButtonClick}>Finish</Button>
           <Button onClick={continueFunc} autoFocus>Continue</Button>
+          <Button onClick={tryAgain}>Try Again</Button>
         </DialogActions>
       </Dialog>
     </div>
