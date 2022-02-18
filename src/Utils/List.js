@@ -28,7 +28,7 @@ function dumpStr(questions) {
 
   return output
 }
-
+// 
 /** 
 * @function loadStr - function to convert a string to an array of questions - reverse of dumpStr method
 * @param {String} string - the string to be converted
