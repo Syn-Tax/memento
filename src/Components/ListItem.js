@@ -68,7 +68,8 @@ function ListItem(props) {
   const deleteMenuItem = () => { // function that handles deleting items
 
     if (props.type === "List") {
-      let split = props.path.split("-")
+      let split = itemPath.split("-")
+      console.log(split)
       let pth = path.join(dataFolder, split.join("/"))
       fs.unlink(pth, (err) => { // delete the file with path "pth"
         if (err) throw err
