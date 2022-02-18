@@ -7,7 +7,7 @@ import { Grid, TextField } from '@material-ui/core'
 */
 function QuestionText(props) {
   return (
-    <Grid item container xs={3} spacing={3}>
+    <Grid item container xs={4} spacing={3}>
       <Grid item xs={12}>
         <TextField defaultValue={props.question["ANSWERS"].join(';') || ""} onChange={(e) => (props.answerChange(e))} variant="outlined" label="Answers - Separate with ';'" style={{ width: "100%" }} />
       </Grid>
